@@ -23,7 +23,8 @@ export default function Authenticated({ header, children }) {
                             </div>
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                    Dashboard
+                                <span className="text-base md:text-lg text-red-500 font-bold">Delights</span> 
+                                <span className="text-base md:text-lg text-gray-500 font-bold">Unveiled</span>
                                 </NavLink>
                             </div>
                         </div>
@@ -109,19 +110,19 @@ export default function Authenticated({ header, children }) {
                 </div>
 
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
-                    <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
-                            Dashboard
-                        </ResponsiveNavLink>
+                    <div className="pt-2 pb-3 pl-3 space-y-1">
+                        <NavLink href={route('dashboard')} active={route().current('dashboard')}>
+                            <span className="text-base md:text-lg text-red-500 font-bold">Delights</span> 
+                            <span className="text-base md:text-lg text-gray-500 font-bold">Unveiled</span>
+                        </NavLink>
                     </div>
 
                     <div className="pt-4 pb-1 border-t border-gray-200">
-                        <div className="px-4">
-                            <div className="font-medium text-base text-gray-800">ssa</div>
-                            <div className="font-medium text-sm text-gray-500">dsdfdf</div>
-                        </div>
-
                         <div className="mt-3 space-y-1">
+                            <ResponsiveNavLink href={route('profile.edit')}>Home</ResponsiveNavLink>
+                            <ResponsiveNavLink href={route('profile.edit')}>Shop</ResponsiveNavLink>
+                            <ResponsiveNavLink href={route('profile.edit')}>About Us</ResponsiveNavLink>
+                            <ResponsiveNavLink href={route('profile.edit')}>Contact Us</ResponsiveNavLink>
                             <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
                             <ResponsiveNavLink method="post" href={route('logout')} as="button">
                                 Log Out

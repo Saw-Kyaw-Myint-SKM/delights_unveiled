@@ -6,10 +6,11 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link } from '@inertiajs/react';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
+import ShoppingCartIcon from '@/Components/ShoppingCartIcon';
 
 export default function Authenticated({ header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
-
+    const count = 3;
     return (
         <div className="min-h-screen bg-gray-100">
             <nav className="bg-white border-b border-gray-100">
@@ -45,7 +46,11 @@ export default function Authenticated({ header, children }) {
                         </div>
                         <div className="hidden sm:flex sm:items-center sm:ms-6">
                             <div className="flex items-center space-x-4">
-                                <Link href='' className="text-gray-700"> Card </Link>
+                                <Link href='' className="text-gray-700 mr-2"> 
+                                    <div className="flex justify-center items-center">
+                                        <ShoppingCartIcon count={2} />
+                                    </div>
+                                </Link>
                             </div>
                             <div className="ms-3 relative">
                                 <Dropdown>
@@ -55,7 +60,7 @@ export default function Authenticated({ header, children }) {
                                                 type="button"
                                                 className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
                                             >
-                                                uhuhuhuhu
+                                                ughand
 
                                                 <svg
                                                     className="ms-2 -me-0.5 h-4 w-4"
@@ -119,8 +124,7 @@ export default function Authenticated({ header, children }) {
 
                     <div className="pt-4 pb-1 border-t border-gray-200">
                         <div className="mt-3 space-y-1">
-                            <ResponsiveNavLink href={route('profile.edit')}>Home</ResponsiveNavLink>
-                            <ResponsiveNavLink href={route('profile.edit')}>Shop</ResponsiveNavLink>
+                            <ResponsiveNavLink href={route('profile.edit')}>Blog</ResponsiveNavLink>
                             <ResponsiveNavLink href={route('profile.edit')}>About Us</ResponsiveNavLink>
                             <ResponsiveNavLink href={route('profile.edit')}>Contact Us</ResponsiveNavLink>
                             <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>

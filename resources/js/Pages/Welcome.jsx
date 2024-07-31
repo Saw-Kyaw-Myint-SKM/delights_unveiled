@@ -3,6 +3,7 @@ import ProductCard from '@/Components/ProductCard';
 import WelcomLayout from '@/Layouts/WelcomeLayout'
 import Navbar from '@/Components/Nevbar';
 import InfoCard from '@/Components/InfoCard ';
+import Footer from '@/Components/Footer';
 import { FaShippingFast, FaUndo, FaHeadset } from 'react-icons/fa';
 
 const products = [
@@ -145,6 +146,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                         </div>
                     </div>
                 </div>
+                <Footer />
             </WelcomLayout >
         </>
     );

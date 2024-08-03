@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { Link, Head } from '@inertiajs/react';
 import ProductCard from '@/Components/ProductCard';
 import WelcomLayout from '@/Layouts/WelcomeLayout'
@@ -92,10 +93,16 @@ const products = [
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
 
+    const [cartCount, setCartCount] = useState(0);
+
+    const handleAddToCart = () => {
+      setCartCount(cartCount + 1);
+    };
+
     return (
         <>
             <Head title="Delights Unveiled" />
-            <WelcomLayout>
+            <WelcomLayout count={cartCount} >
                 <section >
                     <Navbar/>
                     <div
@@ -134,12 +141,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8">
 
                                 {products.map((product, index) => (
-                                    <Link
-                                        //href={route('product.description')}
-                                    >
-                                        <ProductCard key={index} product={product} />
-
-                                    </Link>
+                                    <ProductCard key={index} onAddToCart={handleAddToCart} product={product} />
 
                                 ))}
                             </div>

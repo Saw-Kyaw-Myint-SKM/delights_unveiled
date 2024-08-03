@@ -97,7 +97,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
             <WelcomLayout>
                 <section>
                     <Navbar />
-                    <div
+                    {/* <div
                         className="w-full mx-auto bg-cover bg-center  flex flex-col justify-end h-[60vh]"
                         style={{
                             backgroundImage: "url('/img/leading_photo.png')",
@@ -115,24 +115,25 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 Shop Now
                             </button>
                         </header>
-                    </div>
+                    </div> */}
                 </section>
-                <section className="px-16 relative sm:flex sm:justify-center sm:items-center bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
+                <h1 className="text-5xl">Show Product</h1>
+                {/* <section className='px-16 relative sm:flex sm:justify-center sm:items-center bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white'>
                     <div className="p-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         <InfoCard
-                            icon={<FaShippingFast className="w-8 h-8" />}
-                            title="Free Shipping"
-                            description="Order over $200"
+                            icon={<FaShippingFast className="w-8 h-8" />} 
+                            title="Free Shipping" 
+                            description="Order over $200" 
                         />
-                        <InfoCard
-                            icon={<FaUndo className="w-8 h-8" />}
-                            title="Money Returns"
-                            description="30 days money returns"
+                        <InfoCard 
+                            icon={<FaUndo className="w-8 h-8" />} 
+                            title="Money Returns" 
+                            description="30 days money returns" 
                         />
-                        <InfoCard
-                            icon={<FaHeadset className="w-8 h-8" />}
-                            title="24/7 Support"
-                            description="Customer support"
+                        <InfoCard 
+                            icon={<FaHeadset className="w-8 h-8" />} 
+                            title="24/7 Support" 
+                            description="Customer support" 
                         />
                     </div>
                 </section>
@@ -140,19 +141,21 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     <div className="max-w-7xl mx-auto p-6 lg:p-8">
                         <div className="">
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8">
+
                                 {products.map((product, index) => (
-                                    <Link href={route("product.show", index)}>
-                                        <ProductCard
-                                            key={index}
-                                            product={product}
-                                        />
+                                    <Link
+                                        //href={route('product.description')}
+                                    >
+                                        <ProductCard key={index} product={product} />
+
                                     </Link>
+
                                 ))}
                             </div>
                         </div>
                     </div>
                 </div>
-                <Footer />
+                <Footer /> */}
             </WelcomLayout>
         </>
     );

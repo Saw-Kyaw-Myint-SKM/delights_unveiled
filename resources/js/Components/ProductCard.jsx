@@ -1,7 +1,7 @@
 import React from 'react';
 import Rating from './Rating';
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, onAddToCart  }) => {
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg">
       {/*<img className="w-full" src={product.image} alt={product.name} />*/}
@@ -17,7 +17,9 @@ const ProductCard = ({ product }) => {
         <Rating rating={product.rating} totalStars={product.totalStars} />
       </div>
       <div className="">
-        <button className="w-full bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-2 rounded">
+      <button className="w-full bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-2 rounded"
+         onClick={onAddToCart}
+         >
           Add to cart
         </button>
       </div>

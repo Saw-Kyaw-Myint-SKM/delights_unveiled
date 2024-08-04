@@ -1,8 +1,10 @@
 import React from 'react';
 import Rating from './Rating';
 import { Link } from '@inertiajs/react';
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+import PrimaryButton from './PrimaryButton';
 
-const ProductCard = ({ product, onAddToCart  }) => {
+const OrderCard = ({ product }) => {
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg">
       {/*<img className="w-full" src={product.image} alt={product.name} />*/}
@@ -13,21 +15,24 @@ const ProductCard = ({ product, onAddToCart  }) => {
         </div>
         <div className="px-4">
           <span className="inline-block bg-gray-200 rounded px-3 py-1 text-sm font-semibold text-red-500 mr-2 mb-2">{product.price}</span>
-          <span className="inline-block bg-gray-200 rounded px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 line-through">{product.oldPrice}</span>
         </div>
         <div className="px-4 pb-2">
           <Rating rating={product.rating} totalStars={product.totalStars} />
         </div>
       </Link>
-      <div className="">
-      <button className="w-full bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-2 rounded"
-         onClick={onAddToCart}
-         >
-          Add to cart
-        </button>
-      </div>
+      <div className="flex items-center justify-evenly border border-gray-300 p-2">
+        <PrimaryButton className="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">
+        <MdKeyboardArrowLeft />
+        </PrimaryButton>
+        <span className='text-gray-500 dark:text-gray-100 font-bold text-xl mx-4'>
+          8
+        </span>
+        <PrimaryButton className="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">
+          <MdKeyboardArrowRight />
+        </PrimaryButton>
+    </div>
     </div>
   );
 };
 
-export default ProductCard;
+export default OrderCard;

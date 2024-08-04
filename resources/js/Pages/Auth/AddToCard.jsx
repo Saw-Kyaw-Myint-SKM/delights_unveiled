@@ -1,3 +1,4 @@
+import { usePage } from '@inertiajs/react';
 import { Link, Head } from "@inertiajs/react";
 import ProductCard from "@/Components/ProductCard";
 import WelcomLayout from "@/Layouts/WelcomeLayout";
@@ -5,14 +6,13 @@ import Navbar from "@/Components/Nevbar";
 import InfoCard from "@/Components/InfoCard ";
 import Footer from "@/Components/Footer";
 import { FaShippingFast, FaUndo, FaHeadset } from "react-icons/fa";
-import { createContext } from "react";
-import CardContext from "@/Layouts/context/cardContext";
 
 export default function AddToCard({ auth, laravelVersion, phpVersion }) {
-    const products = createContext(CardContext);
-    if(products === undefined){
-        throw new Error('Products must be defined!..')
-    }
+    const { cart } = usePage().props;
+    const deserializeCart = (cartString) => {
+        return JSON.parse(decodeURIComponent(cartString));
+    };
+    const cartItems = deserializeCart(cart);
     return (
         <>
             <Head title="Delights Unveiled" />
@@ -45,7 +45,7 @@ export default function AddToCard({ auth, laravelVersion, phpVersion }) {
                         <div className="">
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8">
 
-                                {products.map((product, index) => (
+                                {cartItems.map((product, index) => (
                                     <Link
                                         //href={route('product.description')}
                                     >

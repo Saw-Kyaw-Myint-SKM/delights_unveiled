@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ApplicationLogo from "@/Components/ApplicationLogo";
 import Dropdown from "@/Components/Dropdown";
 import NavLink from "@/Components/NavLink";
@@ -6,15 +6,24 @@ import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import { Link } from "@inertiajs/react";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
-import ShoppingCartIcon from "@/Components/ShoppingCartIcon";
+import { MdOutlineShoppingCart } from 'react-icons/md';
 
-export default function Authenticated({ header, children }) {
+export default function Authenticated({count, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
-    const count = 3;
+
+    const [animate, setAnimate] = useState(false);
+
+    useEffect(() => {
+      if (count > 0) {
+        setAnimate(true);
+        const timer = setTimeout(() => setAnimate(false), 300);
+        return () => clearTimeout(timer);
+      }
+    }, [count]);
     return (
         <div className="min-h-screen bg-gray-100">
-            <nav className="bg-white border-b border-gray-100">
+             <nav className="bg-white border-b border-gray-100 bg-white p-4 shadow sticky top-0 z-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
                         <div className="flex">
@@ -59,7 +68,16 @@ export default function Authenticated({ header, children }) {
                                     className="text-gray-700 mr-2"
                                 >
                                     <div className="flex justify-center items-center">
-                                        <ShoppingCartIcon count={2} />
+                                    <div className="relative inline-block">
+                                            <div className={`transform ${animate ? 'scale-125' : ''} transition-transform duration-300`}>
+                                                <MdOutlineShoppingCart size={20} />
+                                                {count > 0 && (
+                                                    <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-600 text-white text-xs rounded-full  px-1.5 py-0">
+                                                    {count}
+                                                    </span>
+                                                )}
+                                            </div>
+                                        </div>
                                     </div>
                                 </Link>
                             </div>

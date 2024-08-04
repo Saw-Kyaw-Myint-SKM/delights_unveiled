@@ -5,92 +5,14 @@ import Navbar from "@/Components/Nevbar";
 import InfoCard from "@/Components/InfoCard ";
 import Footer from "@/Components/Footer";
 import { FaShippingFast, FaUndo, FaHeadset } from "react-icons/fa";
-
-const products = [
-    {
-        name: "Guyer Chair",
-        price: "$45.00",
-        oldPrice: "$50.00",
-        rating: "43",
-        totalStars: 3,
-        image: "link_to_guyer_chair_image",
-    },
-    {
-        name: "Bed King Size",
-        price: "$45.00",
-        oldPrice: "$50.00",
-        rating: "4",
-        totalStars: 5,
-        image: "link_to_bed_king_size_image",
-    },
-    {
-        name: "Couple Sofa",
-        price: "$45.00",
-        oldPrice: "$50.00",
-        rating: "2",
-        totalStars: 5,
-        image: "link_to_couple_sofa_image",
-    },
-    {
-        name: "Couple Sofa",
-        price: "$45.00",
-        oldPrice: "$50.00",
-        rating: "3",
-        totalStars: 5,
-        image: "link_to_couple_sofa_image",
-    },
-
-    {
-        name: "Couple Sofa",
-        price: "$45.00",
-        oldPrice: "$50.00",
-        rating: "5",
-        totalStars: 5,
-        image: "link_to_couple_sofa_image",
-    },
-    {
-        name: "Couple Sofa",
-        price: "$45.00",
-        oldPrice: "$50.00",
-        rating: "2",
-        totalStars: 5,
-        image: "link_to_couple_sofa_image",
-    },
-    {
-        name: "Couple Sofa",
-        price: "$45.00",
-        oldPrice: "$50.00",
-        rating: "5",
-        totalStars: 5,
-        image: "link_to_couple_sofa_image",
-    },
-    {
-        name: "Couple Sofa",
-        price: "$45.00",
-        oldPrice: "$50.00",
-        rating: "2",
-        totalStars: 5,
-        image: "link_to_couple_sofa_image",
-    },
-    {
-        name: "Couple Sofa",
-        price: "$45.00",
-        oldPrice: "$50.00",
-        rating: "3",
-        totalStars: 5,
-        image: "link_to_couple_sofa_image",
-    },
-    {
-        name: "Mattress X",
-        price: "$45.00",
-        oldPrice: "$50.00",
-        rating: "4",
-        totalStars: 5,
-        image: "link_to_mattress_x_image",
-    },
-];
+import { createContext } from "react";
+import CardContext from "@/Layouts/context/cardContext";
 
 export default function AddToCard({ auth, laravelVersion, phpVersion }) {
+    const products = createContext(CardContext);
+    if(products === undefined){
+        throw new Error('Products must be defined!..')
+    }
     return (
         <>
             <Head title="Delights Unveiled" />
@@ -99,7 +21,7 @@ export default function AddToCard({ auth, laravelVersion, phpVersion }) {
                     <Navbar />
                 </section>
                 <h1 className="text-5xl">Add to Card</h1>
-                {/* <section className='px-16 relative sm:flex sm:justify-center sm:items-center bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white'>
+                <section className='px-16 relative sm:flex sm:justify-center sm:items-center bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white'>
                     <div className="p-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         <InfoCard 
                             icon={<FaShippingFast className="w-8 h-8" />} 
@@ -135,8 +57,8 @@ export default function AddToCard({ auth, laravelVersion, phpVersion }) {
                             </div>
                         </div>
                     </div>
-                </div> */}
-                {/* <Footer /> */}
+                </div>
+                <Footer />
             </WelcomLayout>
         </>
     );

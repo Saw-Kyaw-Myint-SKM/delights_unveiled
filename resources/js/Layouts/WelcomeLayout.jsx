@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import ApplicationLogo from "@/Components/ApplicationLogo";
 import Dropdown from "@/Components/Dropdown";
 import NavLink from "@/Components/NavLink";
@@ -7,8 +7,11 @@ import { Link } from "@inertiajs/react";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import { MdOutlineShoppingCart } from 'react-icons/md';
+import CardContext from "./context/cardContext";
 
-export default function Authenticated({count, header, children }) {
+export default function Authenticated({count, cart, header, children }) {
+
+    const products = useContext(CardContext);
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 
@@ -21,18 +24,22 @@ export default function Authenticated({count, header, children }) {
         return () => clearTimeout(timer);
       }
     }, [count]);
+
+    const serializeCart = (cart) => {
+        return encodeURIComponent(JSON.stringify(cart));
+    };
     return (
         <div className="min-h-screen bg-gray-100">
              <nav className="bg-white border-b border-gray-100 bg-white p-4 shadow sticky top-0 z-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
-                        <div className="flex">
+                        <div className="flex justify-center items-center">
                             <div className="shrink-0 flex items-center">
                                 <Link href="/">
                                     <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
                                 </Link>
                             </div>
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            <div className="space-x-8 sm:-my-px sm:flex">
                                 <NavLink
                                     href={route("dashboard")}
                                     active={route().current("dashboard")}
@@ -63,12 +70,9 @@ export default function Authenticated({count, header, children }) {
                         </div>
                         <div className="hidden sm:flex sm:items-center sm:ms-6">
                             <div className="flex items-center space-x-4">
-                                <Link
-                                    href={route("add-to-card")}
-                                    className="text-gray-700 mr-2"
-                                >
+                                <Link href={route("add-to-card", { cart: serializeCart(cart) })} className="text-gray-700 mr-2">
                                     <div className="flex justify-center items-center">
-                                    <div className="relative inline-block">
+                                        <div className="relative inline-block">
                                             <div className={`transform ${animate ? 'scale-125' : ''} transition-transform duration-300`}>
                                                 <MdOutlineShoppingCart size={20} />
                                                 {count > 0 && (

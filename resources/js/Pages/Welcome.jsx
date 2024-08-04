@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, Head } from "@inertiajs/react";
 import ProductCard from "@/Components/ProductCard";
 import WelcomLayout from "@/Layouts/WelcomeLayout";
@@ -7,9 +7,11 @@ import InfoCard from "@/Components/InfoCard ";
 import Footer from "@/Components/Footer";
 import { FaShippingFast, FaUndo, FaHeadset } from "react-icons/fa";
 import CardContext from "@/Layouts/context/cardContext";
+import OrderCard from '@/Components/OrderCard';
 
 const products = [
     {
+        id: 1,
         name: "Guyer Chair",
         price: "$45.00",
         oldPrice: "$50.00",
@@ -17,8 +19,10 @@ const products = [
         totalStars: 3,
         image: "link_to_guyer_chair_image",
         isAdd: false
+        
     },
     {
+        id: 2,
         name: "Bed King Size",
         price: "$45.00",
         oldPrice: "$50.00",
@@ -28,6 +32,7 @@ const products = [
         isAdd: false
     },
     {
+        id: 3,
         name: "Couple Sofa",
         price: "$45.00",
         oldPrice: "$50.00",
@@ -37,6 +42,7 @@ const products = [
         isAdd: false
     },
     {
+        id: 4,
         name: "Couple Sofa",
         price: "$45.00",
         oldPrice: "$50.00",
@@ -47,6 +53,7 @@ const products = [
     },
 
     {
+        id: 5,
         name: "Couple Sofa",
         price: "$45.00",
         oldPrice: "$50.00",
@@ -56,6 +63,7 @@ const products = [
         isAdd: false
     },
     {
+        id: 6,
         name: "Couple Sofa",
         price: "$45.00",
         oldPrice: "$50.00",
@@ -65,6 +73,7 @@ const products = [
         isAdd: false
     },
     {
+        id: 7,
         name: "Couple Sofa",
         price: "$45.00",
         oldPrice: "$50.00",
@@ -74,6 +83,7 @@ const products = [
         isAdd: false
     },
     {
+        id: 8,
         name: "Couple Sofa",
         price: "$45.00",
         oldPrice: "$50.00",
@@ -83,6 +93,7 @@ const products = [
         isAdd: false
     },
     {
+        id: 9,
         name: "Couple Sofa",
         price: "$45.00",
         oldPrice: "$50.00",
@@ -92,6 +103,7 @@ const products = [
         isAdd: false
     },
     {
+        id: 10,
         name: "Mattress X",
         price: "$45.00",
         oldPrice: "$50.00",
@@ -104,16 +116,21 @@ const products = [
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
     const [cartCount, setCartCount] = useState(0);
+    const [cart, setCart] = useState([]);
 
-    const handleAddToCart = () => {
-      setCartCount(cartCount + 1);
-    };
+    useEffect(() => {
+        setCartCount(cart.length);
+      }, [cart]);
+
+  const handleAddToCart = (product) => {
+    setCart([...cart, product]);
+  };
 
     return (
         <>
             <Head title="Delights Unveiled" />
             <CardContext.Provider value={products}>
-                <WelcomLayout count={cartCount} >
+                <WelcomLayout count={cartCount}  cart={cart} >
                     <section>
                         <Navbar />
                         <div
@@ -160,9 +177,8 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                             <div className="">
                                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8">
                                     {products.map((product, index) => (
-                                        <Link href={route("product.show", index)}>
-                                             <ProductCard key={index} onAddToCart={handleAddToCart} product={product} />
-                                        </Link>
+                                        <ProductCard key={product.id} onAddToCart={() => handleAddToCart(product)} product={product} />
+                                        // <OrderCard key={product.id} product={product} />
                                     ))}
                                 </div>
                             </div>

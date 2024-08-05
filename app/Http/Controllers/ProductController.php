@@ -14,7 +14,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::with('user')->latest('id')->get();
-        return Inertia::render('Auth/Admin/Products', [
+        return Inertia::render('Auth/Admin/Product/Products', [
             'products' => $products,
         ]);
     }
@@ -24,7 +24,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return inertia::render('Auth/Admin/Product/CreateProduct');
     }
 
     /**

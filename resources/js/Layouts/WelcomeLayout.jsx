@@ -7,27 +7,20 @@ import { Link } from "@inertiajs/react";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import { MdOutlineShoppingCart } from 'react-icons/md';
-import CardContext from "./context/cardContext";
+import { CartContext } from "./context/CardContext";
 
-export default function Authenticated({count, cart, header, children }) {
-
-    const products = useContext(CardContext);
-    const [showingNavigationDropdown, setShowingNavigationDropdown] =
-        useState(false);
-
+export default function Authenticated({header, children }) {
+    const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
     const [animate, setAnimate] = useState(false);
+    const {cartCount } = useContext(CartContext);
 
     useEffect(() => {
-      if (count > 0) {
+      if (cartCount > 0) {
         setAnimate(true);
         const timer = setTimeout(() => setAnimate(false), 300);
         return () => clearTimeout(timer);
       }
-    }, [count]);
-
-    const serializeCart = (cart) => {
-        return encodeURIComponent(JSON.stringify(cart));
-    };
+    }, [cartCount]);
     return (
         <div className="min-h-screen bg-gray-100">
              <nav className="bg-white border-b border-gray-100 bg-white p-4 shadow sticky top-0 z-50">
@@ -70,14 +63,14 @@ export default function Authenticated({count, cart, header, children }) {
                         </div>
                         <div className="hidden sm:flex sm:items-center sm:ms-6">
                             <div className="flex items-center space-x-4">
-                                <Link href={route("add-to-card", { cart: serializeCart(cart) })} className="text-gray-700 mr-2">
+                                <Link href={route("add-to-card")} className="text-gray-700 mr-2">
                                     <div className="flex justify-center items-center">
                                         <div className="relative inline-block">
                                             <div className={`transform ${animate ? 'scale-125' : ''} transition-transform duration-300`}>
                                                 <MdOutlineShoppingCart size={20} />
-                                                {count > 0 && (
+                                                {cartCount > 0 && (
                                                     <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-600 text-white text-xs rounded-full  px-1.5 py-0">
-                                                    {count}
+                                                    {cartCount}
                                                     </span>
                                                 )}
                                             </div>

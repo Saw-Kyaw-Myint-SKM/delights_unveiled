@@ -13,7 +13,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::with('user')->latest('id')->get();
+        return Inertia::render('Auth/Admin/Products', [
+            'products' => $products,
+        ]);
     }
 
     /**

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class ProductController extends Controller
@@ -30,8 +32,21 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
+        $file = $request->file('photo');
+        $photo = $file->store('images', 'public');
+        $photoPath = Storage::url($photo);
+        $product = Product::create([
+            'photo' => $photoPath,
+            'title' => $request->title,
+            'categories' => $request->categories['name'],
+            'description' => $request->description,
+            'user_id' => auth()->user()->id,
+            'price' => $request->price,
+        ]);
+
+        return redirect()->route('products.index')->with('status', 'success');
     }
 
     /**

@@ -1,5 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 
 export default function Products({ auth, products }) {
     return (
@@ -55,13 +55,14 @@ export default function Products({ auth, products }) {
                                     </div>
                                     <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
                                         <div className="flex items-center space-x-3 w-full md:w-auto">
-                                            <button
+                                            <Link
+                                                href={route("product.create")}
                                                 id="actionsDropdownButton"
                                                 className="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-white focus:outline-none bg-blue-500 rounded-lg border border-gray-200 hover:bg-blue-400 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                                                 type="button"
                                             >
                                                 Actions
-                                            </button>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
@@ -69,6 +70,12 @@ export default function Products({ auth, products }) {
                                     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                                         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             <tr>
+                                                <th
+                                                    scope="col"
+                                                    className="px-4 py-3"
+                                                >
+                                                    Product
+                                                </th>
                                                 <th
                                                     scope="col"
                                                     className="px-4 py-3"
@@ -113,6 +120,13 @@ export default function Products({ auth, products }) {
                                                     key={product.id}
                                                     className="border-b dark:border-gray-700"
                                                 >
+                                                    <td className="px-4 py-3">
+                                                        <img
+                                                            className=" w-32 h-32"
+                                                            src={product.photo}
+                                                            alt="product"
+                                                        />
+                                                    </td>
                                                     <th
                                                         scope="row"
                                                         className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"

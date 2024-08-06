@@ -23,7 +23,7 @@ export default function CreateProduct({ auth }) {
         data,
         setData,
         errors,
-        put,
+        post,
         reset,
         processing,
         recentlySuccessful,
@@ -36,24 +36,24 @@ export default function CreateProduct({ auth }) {
         price: "",
     });
 
-    const updatePassword = (e) => {
+    const createProduct = (e) => {
         e.preventDefault();
         console.log("data", data);
-        // put(route("password.update"), {
-        //     preserveScroll: true,
-        //     onSuccess: () => reset(),
-        //     onError: (errors) => {
-        //         if (errors.password) {
-        //             reset("password", "password_confirmation");
-        //             passwordInput.current.focus();
-        //         }
-
-        //         if (errors.current_password) {
-        //             reset("current_password");
-        //             currentPasswordInput.current.focus();
-        //         }
-        //     },
-        // });
+        post(route("product.store"), {
+            preserveScroll: true,
+            onSuccess: () => reset(),
+            onError: (errors) => {
+                console.log("errors", errors);
+                // if (errors.password) {
+                // reset("password", "password_confirmation");
+                // passwordInput.current.focus();
+                // }
+                // if (errors.current_password) {
+                //     reset("current_password");
+                //     currentPasswordInput.current.focus();
+                // }
+            },
+        });
     };
 
     return (
@@ -72,7 +72,7 @@ export default function CreateProduct({ auth }) {
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
                         <h2 className="text-2xl underline">Product Create</h2>
                         <form
-                            onSubmit={updatePassword}
+                            onSubmit={createProduct}
                             className="mt-6 space-y-6"
                         >
                             <div>
@@ -218,7 +218,7 @@ export default function CreateProduct({ auth }) {
                                 />
 
                                 <InputError
-                                    message={errors.categories}
+                                    message={errors.price}
                                     className="mt-2"
                                 />
                             </div>
@@ -231,7 +231,6 @@ export default function CreateProduct({ auth }) {
 
                                 <TextArea
                                     ref={textareaInput}
-                                    isFocused={true}
                                     className="w-full mt-1"
                                     rows="4"
                                     value={data.description}

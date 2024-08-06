@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -60,17 +61,44 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        return Inertia::render('Auth/Admin/Product/EditProduct', [
+            'product' => $product,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, $id)
     {
-        //
+        $product = Product::find($id);
+        if (!$product) {
+            return redirect()->back()->withErrors(['error' => 'Product not found']);
+        }
+        $photoPath = '';
+        if ($request->hasFile('photo')) {
+            $oldPhotoPath = $product->photo;
+            if ($oldPhotoPath) {
+                $relativePath = str_replace('/storage/', '', $oldPhotoPath);
+                if (Storage::disk('public')->exists($relativePath)) {
+                    Storage::disk('public')->delete($relativePath);
+                }
+            }
+            $file = $request->file('photo');
+            $photo = $file->store('images', 'public');
+            $photoPath = Storage::url($photo);
+        }
+
+        $product->title = $request->title;
+        $product->categories = $request->categories['name'];
+        $product->photo = $photoPath;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->save();
+        return redirect()->route('products.index')->with('status', 'success');
     }
 
     /**

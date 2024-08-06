@@ -11,13 +11,17 @@ import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
-const categoriesList = [
-    { id: 1, name: "furniture" },
-    { id: 2, name: "food" },
-];
-
-export default function CreateProduct({ auth }) {
+export default function EditProduct({ auth, product }) {
     const textareaInput = useRef();
+    const categoriesList = [
+        { id: 1, name: "furniture" },
+        { id: 2, name: "food" },
+    ];
+    const getCategoryIndex = () => {
+        return categoriesList.findIndex(
+            (category) => category.name === product.categories
+        );
+    };
 
     const {
         data,
@@ -29,17 +33,17 @@ export default function CreateProduct({ auth }) {
         recentlySuccessful,
     } = useForm({
         photo: "",
-        title: "",
-        description: "",
-        categories: categoriesList[0],
+        title: product.title,
+        description: product.description,
+        categories: categoriesList[getCategoryIndex()],
         user_id: auth.user?.id,
-        price: "",
+        price: product.price,
     });
 
-    const createProduct = (e) => {
+    const updateProduct = (e) => {
         e.preventDefault();
         console.log("data", data);
-        post(route("product.store"), {
+        post(route("product.update", product.id), {
             preserveScroll: true,
             onSuccess: () => reset(),
             onError: (errors) => {
@@ -61,7 +65,7 @@ export default function CreateProduct({ auth }) {
             user={auth.user}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Products / Create
+                    Products / Edit
                 </h2>
             }
         >
@@ -70,9 +74,9 @@ export default function CreateProduct({ auth }) {
             <div className="py-12">
                 <div className="max-w-3xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                        <h2 className="text-2xl underline">Product Create</h2>
+                        <h2 className="text-2xl underline">Product Edit</h2>
                         <form
-                            onSubmit={createProduct}
+                            onSubmit={updateProduct}
                             className="mt-6 space-y-6"
                         >
                             <div>
@@ -92,6 +96,11 @@ export default function CreateProduct({ auth }) {
                                 <InputError
                                     message={errors.photo}
                                     className="mt-2"
+                                />
+                                <img
+                                    src={product.photo}
+                                    alt="product"
+                                    className="w-36 h-36 mt-2"
                                 />
                             </div>
                             <div>

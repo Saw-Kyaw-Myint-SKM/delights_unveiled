@@ -39,6 +39,8 @@ Route::get('/product/{id}/show', [ProductController::class, 'show'])->name('prod
 Route::middleware('auth')->group(function () {
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
     Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
+    Route::get('/product/{id}/edit', [ProductController::class, 'edit'])->name('product.edit');
+    Route::post('/product/{id}/update', [ProductController::class, 'update'])->name('product.update');
     Route::post('/product/create', [ProductController::class, 'store'])->name('product.store');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

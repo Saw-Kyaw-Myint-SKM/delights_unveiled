@@ -147,7 +147,11 @@ export default function Products({ auth, products }) {
                                                     </td>
                                                     <td className="px-4 py-3 w-12 ">
                                                         <div className="flex items-center">
-                                                            <button
+                                                            <Link
+                                                                href={route(
+                                                                    "product.edit",
+                                                                    product.id
+                                                                )}
                                                                 id="apple-imac-27-dropdown-button"
                                                                 data-dropdown-toggle="apple-imac-27-dropdown"
                                                                 className="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
@@ -167,7 +171,7 @@ export default function Products({ auth, products }) {
                                                                         d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
                                                                     />
                                                                 </svg>
-                                                            </button>
+                                                            </Link>
                                                             <button
                                                                 id="apple-imac-27-dropdown-button"
                                                                 className="inline-flex items-center p-0.5 text-sm font-medium text-center ml-2 text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"

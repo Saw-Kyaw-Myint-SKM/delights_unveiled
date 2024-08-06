@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class OrderController extends Controller
 {
@@ -12,7 +13,10 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::with(['user', 'product'])->latest('id')->get();
+        return Inertia::render('Auth/Admin/Order/Orders', [
+            'orders' => $orders,
+        ]);
     }
 
     /**
@@ -58,8 +62,10 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Order $order)
+    public function destroy($id)
     {
-        //
+        $order = Order::find($id);
+        $order->delete();
+        return back()->with('status', 'delete order');
     }
 }

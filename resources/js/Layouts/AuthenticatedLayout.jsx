@@ -40,6 +40,14 @@ export default function Authenticated({ user, header, children }) {
                                     Product
                                 </NavLink>
                             </div>
+                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex h-16">
+                                <NavLink
+                                    href={route("orders.index")}
+                                    active={route().current("orders.index")}
+                                >
+                                    Order
+                                </NavLink>
+                            </div>
                             <div className="ms-3 relative">
                                 <Dropdown>
                                     <Dropdown.Trigger>

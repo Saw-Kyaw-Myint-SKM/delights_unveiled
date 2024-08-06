@@ -104,8 +104,17 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+        $oldPhotoPath = $product->photo;
+        if ($oldPhotoPath) {
+            $relativePath = str_replace('/storage/', '', $oldPhotoPath);
+            if (Storage::disk('public')->exists($relativePath)) {
+                Storage::disk('public')->delete($relativePath);
+            }
+        }
+        $product->delete();
+        return back()->with('status', 'delete success');
     }
 }

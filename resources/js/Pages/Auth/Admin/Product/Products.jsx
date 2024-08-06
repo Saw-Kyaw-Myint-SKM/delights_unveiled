@@ -1,13 +1,39 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
+import { useForm } from "@inertiajs/react";
 
 export default function Products({ auth, products }) {
+    const {
+        data,
+        setData,
+        delete: destroy,
+        processing,
+        reset,
+        errors,
+    } = useForm({
+        id: "",
+    });
+    const deleteProduct = (id) => {
+        const confirmed = window.confirm(
+            "Are you sure you want to delete this product?"
+        );
+        if (confirmed) {
+            destroy(route("product.destroy", id), {
+                onSuccess: () => console.log("Product deleted successfully"),
+                onError: (error) =>
+                    console.error("Error deleting product:", error),
+            });
+        } else {
+            console.log("Product deletion cancelled");
+        }
+    };
+
     return (
         <AuthenticatedLayout
             user={auth.user}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Products
+                    Products / List
                 </h2>
             }
         >
@@ -61,7 +87,7 @@ export default function Products({ auth, products }) {
                                                 className="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-white focus:outline-none bg-blue-500 rounded-lg border border-gray-200 hover:bg-blue-400 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                                                 type="button"
                                             >
-                                                Actions
+                                                Create
                                             </Link>
                                         </div>
                                     </div>
@@ -153,8 +179,7 @@ export default function Products({ auth, products }) {
                                                                     product.id
                                                                 )}
                                                                 id="apple-imac-27-dropdown-button"
-                                                                data-dropdown-toggle="apple-imac-27-dropdown"
-                                                                className="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
+                                                                className="inline-flex text-blue-500 items-center p-0.5 text-sm font-medium text-center hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
                                                                 type="button"
                                                             >
                                                                 <svg
@@ -173,8 +198,15 @@ export default function Products({ auth, products }) {
                                                                 </svg>
                                                             </Link>
                                                             <button
+                                                                onClick={(
+                                                                    e
+                                                                ) => {
+                                                                    deleteProduct(
+                                                                        product.id
+                                                                    );
+                                                                }}
                                                                 id="apple-imac-27-dropdown-button"
-                                                                className="inline-flex items-center p-0.5 text-sm font-medium text-center ml-2 text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
+                                                                className="inline-flex items-center p-0.5 text-sm font-medium text-center ml-2 text-red-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
                                                                 type="button"
                                                             >
                                                                 <svg

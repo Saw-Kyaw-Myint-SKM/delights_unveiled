@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AddToCardController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -30,9 +31,7 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/add-to-card', [AddToCardController::class, 'index'])->name('add-to-card');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/contact', [BlogController::class, 'contact'])->name('contact');

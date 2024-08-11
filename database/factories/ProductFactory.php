@@ -18,6 +18,7 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
+            'photo' => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAgS_C07GNqBfFcnJUdyG4fdg4YHgsaLd34w&s",
             'title' => $this->faker->word,
             'description' => $this->faker->paragraph,
             'categories' => $this->faker->randomElement(['food', 'furniture']),

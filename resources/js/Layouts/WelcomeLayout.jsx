@@ -61,7 +61,7 @@ export default function Authenticated({header, children }) {
                                 Search
                             </PrimaryButton>
                         </div>
-                        <div className="hidden sm:flex sm:items-center sm:ms-6">
+                        <div className="flex sm:items-center sm:ms-6">
                             <div className="flex items-center space-x-4">
                                 <Link href={route("add-to-card")} className="text-gray-700 mr-2">
                                     <div className="flex justify-center items-center">
@@ -78,7 +78,7 @@ export default function Authenticated({header, children }) {
                                     </div>
                                 </Link>
                             </div>
-                            <div className="ms-3 relative">
+                            <div className="hidden sm:flex ms-3 relative">
                                 <Dropdown>
                                     <Dropdown.Trigger>
                                         <span className="inline-flex rounded-md">
@@ -121,7 +121,7 @@ export default function Authenticated({header, children }) {
                             </div>
                         </div>
 
-                        <div className="-me-2 flex items-center sm:hidden">
+                        <div className="me-2 flex items-center sm:hidden">
                             <button
                                 onClick={() =>
                                     setShowingNavigationDropdown(

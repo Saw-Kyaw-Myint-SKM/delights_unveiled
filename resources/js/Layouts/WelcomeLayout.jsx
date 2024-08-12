@@ -34,8 +34,8 @@ export default function Authenticated({header, children }) {
                             </div>
                             <div className="space-x-8 sm:-my-px sm:flex">
                                 <NavLink
-                                    href={route("dashboard")}
-                                    active={route().current("dashboard")}
+                                    href={route("welcome")}
+                                    active={route().current("welcome")}
                                 >
                                     <span className="text-base md:text-lg text-red-500 font-bold">
                                         Delights

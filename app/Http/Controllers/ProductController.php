@@ -53,9 +53,13 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request)
+    public function show($id)
     {
-        return Inertia::render('Auth/ShowProduct');
+        $product=Product::with('user')->find($id);
+        return Inertia::render('Auth/ShowProduct',
+        [
+            'product' => $product,
+        ]);
     }
 
     /**

@@ -21,7 +21,7 @@ const ProductCard = ({ product, onAddToCart  }) => {
               <span className="inline-block bg-gray-200 rounded px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 line-through">{product.oldPrice} Ks</span>
             </div>
             <div className="px-4 pb-2">
-              <Rating rating={product.rating} totalStars={product.totalStars} />
+              <Rating rating={product.rating} totalStars={product.totalStars}  off={true}/>
             </div>
           </Link>
           <div className="">

@@ -1,4 +1,4 @@
-import React, { useRef, useContext, useEffect } from "react";
+import React, { useRef, useContext, useEffect, useState } from "react";
 import { Link, Head } from "@inertiajs/react";
 import ProductCard from "@/Components/ProductCard";
 import WelcomLayout from "@/Layouts/WelcomeLayout";
@@ -7,16 +7,18 @@ import InfoCard from "@/Components/InfoCard ";
 import Footer from "@/Components/Footer";
 import { FaShippingFast, FaUndo, FaHeadset } from "react-icons/fa";
 import { CartContext } from "@/Layouts/context/CardContext";
+import { useForm } from "@inertiajs/react";
 
 export default function Welcome({
     auth,
     laravelVersion,
     phpVersion,
     products,
+    searchValue,
+    categoryValue,
 }) {
     const productRef = useRef(null);
-    const { selectedCategory, setSelectedCategory, setProducts } =
-        useContext(CartContext);
+    const [category, setCategory] = useState("");
 
     const handleScrollToProducts = () => {
         if (productRef.current) {
@@ -24,14 +26,35 @@ export default function Welcome({
         }
     };
 
+    const {
+        data: categoryData,
+        setData: setcategoryData,
+        get,
+        processing: setCategoryProcessing,
+        reset: categoryResult,
+    } = useForm({
+        category: "",
+    });
+
     const handleCategoryChange = (category) => {
-        setSelectedCategory(category);
+        categoryData.category = category;
+        get(route("welcome"), {
+            preserveScroll: true,
+            onError: (errors) => {
+                console.log("errors", errors);
+            },
+        });
     };
+    useEffect(() => {
+        if (categoryValue?.length) {
+            setCategory(categoryValue);
+        }
+    }, []);
 
     return (
         <>
             <Head title="Delights Unveiled" />
-            <WelcomLayout>
+            <WelcomLayout searchValue={searchValue}>
                 <section>
                     <Navbar />
                     <div
@@ -79,9 +102,9 @@ export default function Welcome({
                 <section className="px-16 relative sm:flex sm:justify-start sm:items-center bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
                     <div className="flex justify-start space-x-4">
                         <button
-                            onClick={() => handleCategoryChange("All")}
+                            onClick={() => handleCategoryChange("all")}
                             className={`border-2 px-4 py-2 rounded font-bold ${
-                                selectedCategory === "All"
+                                category === "all" || category == ""
                                     ? "bg-red-400 text-white border-green-500"
                                     : "border-red-500 text-red-500"
                             }`}
@@ -91,7 +114,7 @@ export default function Welcome({
                         <button
                             onClick={() => handleCategoryChange("food")}
                             className={`border-2 px-4 py-2 rounded font-bold ${
-                                selectedCategory === "food"
+                                category === "food"
                                     ? "bg-red-400 text-white border-green-500"
                                     : "border-red-500  text-red-500"
                             }`}
@@ -101,7 +124,7 @@ export default function Welcome({
                         <button
                             onClick={() => handleCategoryChange("furniture")}
                             className={`border-2 px-4 py-2 rounded font-bold ${
-                                selectedCategory === "furniture"
+                                category === "furniture"
                                     ? "bg-red-400 text-white border-green-500"
                                     : "border-red-500  text-red-500"
                             }`}

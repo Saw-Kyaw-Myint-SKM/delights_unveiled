@@ -6,24 +6,51 @@ import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import { Link } from "@inertiajs/react";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
-import { MdOutlineShoppingCart } from 'react-icons/md';
+import { MdOutlineShoppingCart } from "react-icons/md";
 import { CartContext } from "./context/CardContext";
+import { useForm } from "@inertiajs/react";
 
-export default function Authenticated({header, children }) {
-    const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
+export default function Authenticated({ header, children, searchValue = "" }) {
+    const [showingNavigationDropdown, setShowingNavigationDropdown] =
+        useState(false);
     const [animate, setAnimate] = useState(false);
-    const {cartCount } = useContext(CartContext);
+    const { cartCount } = useContext(CartContext);
+
+    const {
+        data: searchData,
+        setData: setSearchData,
+        get,
+        processing: searchProcessing,
+        reset: searchResult,
+    } = useForm({
+        search: "",
+    });
+    const onSubmitSearch = (e) => {
+        e.preventDefault();
+        get(route("welcome"), {
+            preserveScroll: true,
+            onError: (errors) => {
+                console.log("errors", errors);
+            },
+        });
+    };
+    useEffect(() => {
+        if (cartCount > 0) {
+            setAnimate(true);
+            const timer = setTimeout(() => setAnimate(false), 300);
+            return () => clearTimeout(timer);
+        }
+    }, [cartCount]);
 
     useEffect(() => {
-      if (cartCount > 0) {
-        setAnimate(true);
-        const timer = setTimeout(() => setAnimate(false), 300);
-        return () => clearTimeout(timer);
-      }
-    }, [cartCount]);
+        if (searchValue?.length) {
+            setSearchData("search", searchValue);
+        }
+    }, []);
+
     return (
         <div className="min-h-screen bg-gray-100">
-             <nav className="bg-white border-b border-gray-100 bg-white p-4 shadow sticky top-0 z-50">
+            <nav className="bg-white border-b border-gray-100 bg-white p-4 shadow sticky top-0 z-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
                         <div className="flex justify-center items-center">
@@ -47,30 +74,45 @@ export default function Authenticated({header, children }) {
                             </div>
                         </div>
                         <div className="hidden md:flex items-center space-x-4">
-                            <TextInput
-                                id="search"
-                                type="text"
-                                name="search..."
-                                className="px-4 py-2 rounded-md"
-                                autoComplete="Search"
-                                onChange={(e) =>
-                                    setData("search", e.target.value)
-                                }
-                            />
-                            <PrimaryButton className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                                Search
-                            </PrimaryButton>
+                            <form onSubmit={onSubmitSearch}>
+                                <TextInput
+                                    id="search"
+                                    type="text"
+                                    placeholder="search product..."
+                                    className="px-4 py-2 rounded-md"
+                                    autoComplete="Search"
+                                    value={searchData.search}
+                                    onChange={(e) =>
+                                        setSearchData("search", e.target.value)
+                                    }
+                                />
+                                <PrimaryButton
+                                    type="submit"
+                                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 ml-1 mb-1 px-4 rounded"
+                                >
+                                    Search
+                                </PrimaryButton>
+                            </form>
                         </div>
                         <div className="flex sm:items-center sm:ms-6">
                             <div className="flex items-center space-x-4">
-                                <Link href={route("add-to-card")} className="text-gray-700 mr-2">
+                                <Link
+                                    href={route("add-to-card")}
+                                    className="text-gray-700 mr-2"
+                                >
                                     <div className="flex justify-center items-center">
                                         <div className="relative inline-block">
-                                            <div className={`transform ${animate ? 'scale-125' : ''} transition-transform duration-300`}>
-                                                <MdOutlineShoppingCart size={20} />
+                                            <div
+                                                className={`transform ${
+                                                    animate ? "scale-125" : ""
+                                                } transition-transform duration-300`}
+                                            >
+                                                <MdOutlineShoppingCart
+                                                    size={20}
+                                                />
                                                 {cartCount > 0 && (
                                                     <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-600 text-white text-xs rounded-full  px-1.5 py-0">
-                                                    {cartCount}
+                                                        {cartCount}
                                                     </span>
                                                 )}
                                             </div>

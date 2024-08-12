@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\AddToCardController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -29,15 +31,15 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/add-to-card', [AddToCardController::class, 'index'])->name('add-to-card');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/contact', [BlogController::class, 'contact'])->name('contact');
 Route::get('/product/{id}/show', [ProductController::class, 'show'])->name('product.show');
 
 Route::middleware('auth')->group(function () {
+
+    //product
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
     Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
     Route::delete('/product/{id}/delete', [ProductController::class, 'destroy'])->name('product.destroy');
@@ -48,6 +50,14 @@ Route::middleware('auth')->group(function () {
     // order
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::delete('/orders/{id}/delete', [OrderController::class, 'destroy'])->name('order.destroy');
+
+// User
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
+    Route::post('/user/create', [UserController::class, 'store'])->name('user.store');
+    Route::delete('/user/{id}/delete', [UserController::class, 'destroy'])->name('user.destroy');
+    Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+    Route::post('/user/{id}/update', [UserController::class, 'update'])->name('user.update');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

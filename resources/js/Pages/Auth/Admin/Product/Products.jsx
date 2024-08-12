@@ -1,8 +1,9 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
 import { useForm } from "@inertiajs/react";
+import { useEffect, useState } from "react";
 
-export default function Products({ auth, products }) {
+export default function Products({ auth, products, searchValue = "" }) {
     const {
         data,
         setData,
@@ -12,6 +13,15 @@ export default function Products({ auth, products }) {
         errors,
     } = useForm({
         id: "",
+    });
+    const {
+        data: searchData,
+        setData: setSearchData,
+        get,
+        processing: searchProcessing,
+        reset: searchResult,
+    } = useForm({
+        search: "",
     });
     const deleteProduct = (id) => {
         const confirmed = window.confirm(
@@ -27,7 +37,21 @@ export default function Products({ auth, products }) {
             console.log("Product deletion cancelled");
         }
     };
-
+    const onSubmitSearch = (e) => {
+        e.preventDefault();
+        console.log("data", data);
+        get(route("products.index"), {
+            preserveScroll: true,
+            onError: (errors) => {
+                console.log("errors", errors);
+            },
+        });
+    };
+    useEffect(() => {
+        if (searchValue?.length) {
+            setSearchData("search", searchValue);
+        }
+    }, []);
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -46,7 +70,10 @@ export default function Products({ auth, products }) {
                             <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
                                 <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                                     <div className="w-full md:w-1/2">
-                                        <form className="flex items-center">
+                                        <form
+                                            className="flex items-center"
+                                            onSubmit={onSubmitSearch}
+                                        >
                                             <label
                                                 htmlFor="simple-search"
                                                 className="sr-only"
@@ -74,6 +101,13 @@ export default function Products({ auth, products }) {
                                                     id="simple-search"
                                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                                     placeholder="Search"
+                                                    value={searchData.search}
+                                                    onChange={(e) =>
+                                                        setSearchData(
+                                                            "search",
+                                                            e.target.value
+                                                        )
+                                                    }
                                                     required=""
                                                 />
                                             </div>

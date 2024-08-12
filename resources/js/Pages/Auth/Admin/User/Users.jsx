@@ -1,9 +1,8 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
 import { useForm } from "@inertiajs/react";
-import { useEffect } from "react";
 
-export default function Orders({ auth, orders, searchValue = "" }) {
+export default function Users({ auth, users }) {
     const {
         data,
         setData,
@@ -14,67 +13,40 @@ export default function Orders({ auth, orders, searchValue = "" }) {
     } = useForm({
         id: "",
     });
-    const {
-        data: searchData,
-        setData: setSearchData,
-        get,
-        processing: searchProcessing,
-        reset: searchResult,
-    } = useForm({
-        search: "",
-    });
-    const deleteProduct = (id) => {
+    const deleteUser = (id) => {
         const confirmed = window.confirm(
-            "Are you sure you want to delete this order?"
+            "Are you sure you want to delete this user?"
         );
         if (confirmed) {
-            destroy(route("order.destroy", id), {
-                onSuccess: () => console.log("Order deleted successfully"),
+            destroy(route("user.destroy", id), {
+                onSuccess: () => console.log("User deleted successfully"),
                 onError: (error) =>
-                    console.error("Error deleting order:", error),
+                    console.error("Error deleting user:", error),
             });
         } else {
-            console.log("Order deletion cancelled");
+            console.log("User deletion cancelled");
         }
     };
-    const onSubmitSearch = (e) => {
-        e.preventDefault();
-        get(route("orders.index"), {
-            preserveScroll: true,
-            onError: (errors) => {
-                console.log("errors", errors);
-            },
-        });
-    };
-    useEffect(() => {
-        if (searchValue?.length) {
-            console.log("searchValue", searchValue);
-            setSearchData("search", searchValue);
-        }
-    }, []);
 
     return (
         <AuthenticatedLayout
             user={auth.user}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Orders / List
+                    Users / List
                 </h2>
             }
         >
-            <Head title="Orders" />
+            <Head title="Products" />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto">
                     <section className="dark:bg-gray-900 p-3 sm:p-5">
                         <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
                             <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
-                                <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+                                {/* <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                                     <div className="w-full md:w-1/2">
-                                        <form
-                                            className="flex items-center"
-                                            onSubmit={onSubmitSearch}
-                                        >
+                                        <form className="flex items-center">
                                             <label
                                                 htmlFor="simple-search"
                                                 className="sr-only"
@@ -102,19 +74,24 @@ export default function Orders({ auth, orders, searchValue = "" }) {
                                                     id="simple-search"
                                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                                     placeholder="Search"
-                                                    value={searchData.search}
-                                                    onChange={(e) =>
-                                                        setSearchData(
-                                                            "search",
-                                                            e.target.value
-                                                        )
-                                                    }
                                                     required=""
                                                 />
                                             </div>
                                         </form>
                                     </div>
-                                </div>
+                                    <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
+                                        <div className="flex items-center space-x-3 w-full md:w-auto">
+                                            <Link
+                                                href={route("user.create")}
+                                                id="actionsDropdownButton"
+                                                className="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-white focus:outline-none bg-blue-500 rounded-lg border border-gray-200 hover:bg-blue-400 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                                                type="button"
+                                            >
+                                                Create
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div> */}
                                 <div className="overflow-x-auto">
                                     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                                         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -123,37 +100,19 @@ export default function Orders({ auth, orders, searchValue = "" }) {
                                                     scope="col"
                                                     className="px-4 py-3"
                                                 >
-                                                    Order No
+                                                    Name
                                                 </th>
                                                 <th
                                                     scope="col"
                                                     className="px-4 py-3"
                                                 >
-                                                    Product
+                                                    Email
                                                 </th>
                                                 <th
                                                     scope="col"
                                                     className="px-4 py-3"
                                                 >
-                                                    product name
-                                                </th>
-                                                <th
-                                                    scope="col"
-                                                    className="px-4 py-3"
-                                                >
-                                                    customer
-                                                </th>
-                                                <th
-                                                    scope="col"
-                                                    className="px-4 py-3"
-                                                >
-                                                    quantity
-                                                </th>
-                                                <th
-                                                    scope="col"
-                                                    className="px-4 py-3"
-                                                >
-                                                    Price
+                                                    role
                                                 </th>
                                                 <th
                                                     scope="col"
@@ -164,47 +123,55 @@ export default function Orders({ auth, orders, searchValue = "" }) {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {orders.map((order, index) => (
+                                            {users.map((user, index) => (
                                                 <tr
-                                                    key={order.id}
+                                                    key={user.id}
                                                     className="border-b dark:border-gray-700"
                                                 >
-                                                    <td className="px-4 py-3">
-                                                        {order.cart_number}
-                                                    </td>
                                                     <th
                                                         scope="row"
                                                         className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                                     >
-                                                        <img
-                                                            className=" w-24 h-24"
-                                                            src={
-                                                                order.product
-                                                                    ?.photo
-                                                            }
-                                                            alt="order"
-                                                        />
+                                                        {user.name}
                                                     </th>
                                                     <td className="px-4 py-3">
-                                                        {order.product?.title}
+                                                        {user.email}
                                                     </td>
                                                     <td className="px-4 py-3">
-                                                        {order.user.name}
-                                                    </td>
-                                                    <td className="px-4 py-3">
-                                                        {order.quantity}
-                                                    </td>
-                                                    <td className="px-4 py-3">
-                                                        {order.price}
+                                                        {user.role}
                                                     </td>
                                                     <td className="px-4 py-3 w-12 ">
                                                         <div className="flex items-center">
+                                                            <Link
+                                                                href={route(
+                                                                    "user.edit",
+                                                                    user.id
+                                                                )}
+                                                                id="apple-imac-27-dropdown-button"
+                                                                className="inline-flex text-blue-500 items-center p-0.5 text-sm font-medium text-center hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
+                                                                type="button"
+                                                            >
+                                                                <svg
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    fill="none"
+                                                                    viewBox="0 0 24 24"
+                                                                    strokeWidth="1.5"
+                                                                    stroke="currentColor"
+                                                                    className="size-6"
+                                                                >
+                                                                    <path
+                                                                        strokeLinecap="round"
+                                                                        strokeLinejoin="round"
+                                                                        d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
+                                                                    />
+                                                                </svg>
+                                                            </Link>
                                                             <button
                                                                 onClick={(
                                                                     e
                                                                 ) => {
-                                                                    deleteProduct(
-                                                                        order.id
+                                                                    deleteUser(
+                                                                        user.id
                                                                     );
                                                                 }}
                                                                 id="apple-imac-27-dropdown-button"

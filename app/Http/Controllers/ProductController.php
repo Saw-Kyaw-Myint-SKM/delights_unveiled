@@ -14,11 +14,15 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::with('user')->latest('id')->get();
+        $searchTerm = $request->input('search');
+        $products = Product::with('user')->where('title', 'like', "%{$searchTerm}%")
+            ->orWhere('description', 'like', "%{$searchTerm}%")->latest('id')->get();
+
         return Inertia::render('Auth/Admin/Product/Products', [
             'products' => $products,
+            'searchValue' => $searchTerm,
         ]);
     }
 

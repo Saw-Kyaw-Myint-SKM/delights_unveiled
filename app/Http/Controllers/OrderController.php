@@ -11,11 +11,18 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::with(['user', 'product'])->latest('id')->get();
+        $searchTerm = $request->input('search');
+        $orders = Order::with(['user', 'product'])
+            ->whereHas('user', function ($query) use ($searchTerm) {
+                $query->where('name', 'like', "%{$searchTerm}%");
+            })->groupBy('cart_number')
+            ->latest('id')
+            ->get();
         return Inertia::render('Auth/Admin/Order/Orders', [
             'orders' => $orders,
+            'searchValue' => $searchTerm,
         ]);
     }
 

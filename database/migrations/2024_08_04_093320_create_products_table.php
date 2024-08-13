@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('photo');
             $table->string('title');
             $table->text('description');
+            $table->integer('rating')->default(3);
+            $table->integer('totalStars')->default(5);
             $table->enum('categories', ['food', 'furniture']);
             $table->float('total_order')->default(0);
             $table->foreignId('user_id')->constrained()->onDelete('cascade');

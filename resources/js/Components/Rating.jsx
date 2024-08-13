@@ -1,19 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const Rating = ({ rating, totalStars }) => {
-  const stars = Array.from({ length: totalStars }, (v, i) => i < rating);
+const Rating = ({ rating = 0, totalStars = 5, off = false }) => {
+  const [currentRating, setCurrentRating] = useState(rating);
+
+  // Function to handle the star click
+  const handleRating = (index) => {
+    if (!off) {
+      setCurrentRating(index + 1);
+    }
+  };
 
   return (
     <div className="flex items-center">
-      {stars.map((isFilled, index) => (
+      {Array.from({ length: totalStars }, (v, i) => (
         <svg
-          key={index}
+          key={i}
           xmlns="http://www.w3.org/2000/svg"
-          fill={isFilled ? 'currentColor' : 'none'}
+          fill={i < currentRating ? 'currentColor' : 'none'}
           viewBox="0 0 24 24"
           strokeWidth={2}
           stroke="currentColor"
-          className={`w-3 h-3 ${isFilled ? 'text-yellow-500' : 'text-gray-300'}`}
+          className={`w-3 h-3 ${i < currentRating ? 'text-yellow-500' : 'text-gray-300'} ${!off && 'cursor-pointer'}`}
+          onClick={() => handleRating(i)}
         >
           <path
             strokeLinecap="round"

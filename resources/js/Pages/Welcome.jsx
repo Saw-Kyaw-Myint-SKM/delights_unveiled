@@ -80,7 +80,10 @@ export default function Welcome({
                         </header>
                     </div>
                 </section>
-                <section className="px-16 relative sm:flex sm:justify-center sm:items-center bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white mb-7">
+                <section
+                    ref={productRef}
+                    className="px-16 relative sm:flex sm:justify-center sm:items-center bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white mb-7"
+                >
                     <div className="p-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         <InfoCard
                             icon={<FaShippingFast className="w-8 h-8" />}
@@ -145,6 +148,11 @@ export default function Welcome({
                         </div>
                     </div>
                 </div>
+                <section className="relative sm:flex sm:justify-center sm:items-start min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
+                    <div className="max-w-7xl mx-auto p-6 lg:p-8">
+                        <ProductSlider />
+                    </div>
+                </section>
                 <Footer />
             </WelcomLayout>
         </>

@@ -1,161 +1,73 @@
 import { Link, Head } from "@inertiajs/react";
-import ProductCard from "@/Components/ProductCard";
 import WelcomLayout from "@/Layouts/WelcomeLayout";
 import Navbar from "@/Components/Nevbar";
-import InfoCard from "@/Components/InfoCard ";
+import Rating from "@/Components/Rating";
+import { CartContext } from "@/Layouts/context/CardContext";
+import { useContext } from "react";
 import Footer from "@/Components/Footer";
-import { FaShippingFast, FaUndo, FaHeadset } from "react-icons/fa";
 
-const products = [
-    {
-        name: "Guyer Chair",
-        price: "$45.00",
-        oldPrice: "$50.00",
-        rating: "43",
-        totalStars: 3,
-        image: "link_to_guyer_chair_image",
-    },
-    {
-        name: "Bed King Size",
-        price: "$45.00",
-        oldPrice: "$50.00",
-        rating: "4",
-        totalStars: 5,
-        image: "link_to_bed_king_size_image",
-    },
-    {
-        name: "Couple Sofa",
-        price: "$45.00",
-        oldPrice: "$50.00",
-        rating: "2",
-        totalStars: 5,
-        image: "link_to_couple_sofa_image",
-    },
-    {
-        name: "Couple Sofa",
-        price: "$45.00",
-        oldPrice: "$50.00",
-        rating: "3",
-        totalStars: 5,
-        image: "link_to_couple_sofa_image",
-    },
-
-    {
-        name: "Couple Sofa",
-        price: "$45.00",
-        oldPrice: "$50.00",
-        rating: "5",
-        totalStars: 5,
-        image: "link_to_couple_sofa_image",
-    },
-    {
-        name: "Couple Sofa",
-        price: "$45.00",
-        oldPrice: "$50.00",
-        rating: "2",
-        totalStars: 5,
-        image: "link_to_couple_sofa_image",
-    },
-    {
-        name: "Couple Sofa",
-        price: "$45.00",
-        oldPrice: "$50.00",
-        rating: "5",
-        totalStars: 5,
-        image: "link_to_couple_sofa_image",
-    },
-    {
-        name: "Couple Sofa",
-        price: "$45.00",
-        oldPrice: "$50.00",
-        rating: "2",
-        totalStars: 5,
-        image: "link_to_couple_sofa_image",
-    },
-    {
-        name: "Couple Sofa",
-        price: "$45.00",
-        oldPrice: "$50.00",
-        rating: "3",
-        totalStars: 5,
-        image: "link_to_couple_sofa_image",
-    },
-    {
-        name: "Mattress X",
-        price: "$45.00",
-        oldPrice: "$50.00",
-        rating: "4",
-        totalStars: 5,
-        image: "link_to_mattress_x_image",
-    },
-];
-
-export default function Welcome({ auth, laravelVersion, phpVersion }) {
+export default function Welcome({ auth, product }) {
+    const { handleAddToCart } = useContext(CartContext);
+    console.log(product)
+    if (!product) {
+        return <div>Product not found</div>;
+    }
     return (
         <>
             <Head title="Delights Unveiled" />
             <WelcomLayout>
                 <section>
                     <Navbar />
-                    {/* <div
-                        className="w-full mx-auto bg-cover bg-center  flex flex-col justify-end h-[60vh]"
-                        style={{
-                            backgroundImage: "url('/img/leading_photo.png')",
-                        }}
-                    >
-                        <header className="pl-16 pr-16 pt-5 pb-5">
-                            <h1 className="text-base md:text-4xl font-bold">
-                                Best Collection For Home Decoration
-                            </h1>
-                            <p className="text-gray-600 text-sm md:text-lg">
-                                Lorem, ipsum dolor sit amet consectetur
-                                adipisicing elit...
-                            </p>
-                            <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4">
-                                Shop Now
-                            </button>
-                        </header>
-                    </div> */}
                 </section>
-                <h1 className="text-5xl">Show Product</h1>
-                {/* <section className='px-16 relative sm:flex sm:justify-center sm:items-center bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white'>
-                    <div className="p-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <InfoCard
-                            icon={<FaShippingFast className="w-8 h-8" />} 
-                            title="Free Shipping" 
-                            description="Order over $200" 
-                        />
-                        <InfoCard 
-                            icon={<FaUndo className="w-8 h-8" />} 
-                            title="Money Returns" 
-                            description="30 days money returns" 
-                        />
-                        <InfoCard 
-                            icon={<FaHeadset className="w-8 h-8" />} 
-                            title="24/7 Support" 
-                            description="Customer support" 
-                        />
-                    </div>
-                </section>
-                <div className="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-                    <div className="max-w-7xl mx-auto p-6 lg:p-8">
-                        <div className="">
-                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8">
+                <div className="container max-w-7xl mx-auto px-4 py-10">
+                    <section >
+                        <div className="flex flex-col lg:flex-row px-16">
+                            {/* Product Image and Thumbnails */}
+                            <div className="w-full mb-10 lg:w-2/5">
+                                <img className='w-full' src="/img/original.png" />
+                            </div>
 
-                                {products.map((product, index) => (
-                                    <Link
-                                        //href={route('product.description')}
+                            {/* Product Details */}
+                            <div className="w-full lg:w-3/5 lg:pl-10">
+                                <h1 className="text-2xl font-bold text-red-500 mb-4">{product.title}</h1>
+                                <div className="flex items-center mb-4">
+                                    <span className="text-xl text-gray-800 font-semibold">{product.price} Ks</span>
+                                    <span className="ml-2 text-sm text-gray-500"><Rating rating={3} totalStars={5} off={false} /></span>
+                                </div>
+                                <div className="mt-5">
+                                    <div>
+                                        <span className="text-base text-gray-500 mr-3">Category:</span>
+                                        <span className="text-xs  text-red-600 font-medium mr-5 uppercase">{product.categories}</span>
+                                    </div>
+                                    <div>
+                                        <span className="text-base text-gray-500">Total Order: </span>
+                                        <span className="text-base text-red-500 font-bold mr-5">{product.total_order}</span>
+                                    </div>
+
+                                </div>
+
+                                <div className="my-5">
+                                    <span className="text-base text-gray-500 mr-5">Uploaded by:</span>
+                                    <span className="text-base font-semibold text-gray-700"> {product.user.name}</span>
+                                </div>
+
+                                <p className="text-gray-600 mb-4">{product.description}</p>
+
+                                <div className="">
+                                    <button className="w-full mb-5 sm:w-1/3 bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-2 rounded mt-5 mr-10"
+                                        onClick={() => handleAddToCart(product)}
                                     >
-                                        <ProductCard key={index} product={product} />
-
+                                        Add to cart
+                                    </button>
+                                    <Link href="/" className="w-full sm:w-1/3 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-10 rounded mt-5">
+                                        Back
                                     </Link>
-
-                                ))}
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </section>
                 </div>
-                <Footer /> */}
+                <Footer />
             </WelcomLayout>
         </>
     );

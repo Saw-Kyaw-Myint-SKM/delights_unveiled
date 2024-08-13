@@ -106,31 +106,28 @@ export default function Welcome({
                     <div className="flex justify-start space-x-4">
                         <button
                             onClick={() => handleCategoryChange("all")}
-                            className={`border-2 px-4 py-2 rounded font-bold ${
-                                category === "all" || category == ""
+                            className={`border-2 px-4 py-2 rounded font-bold ${category === "all" || category == ""
                                     ? "bg-red-400 text-white border-green-500"
                                     : "border-red-500 text-red-500"
-                            }`}
+                                }`}
                         >
                             All
                         </button>
                         <button
                             onClick={() => handleCategoryChange("food")}
-                            className={`border-2 px-4 py-2 rounded font-bold ${
-                                category === "food"
+                            className={`border-2 px-4 py-2 rounded font-bold ${category === "food"
                                     ? "bg-red-400 text-white border-green-500"
                                     : "border-red-500  text-red-500"
-                            }`}
+                                }`}
                         >
                             Food
                         </button>
                         <button
                             onClick={() => handleCategoryChange("furniture")}
-                            className={`border-2 px-4 py-2 rounded font-bold ${
-                                category === "furniture"
+                            className={`border-2 px-4 py-2 rounded font-bold ${category === "furniture"
                                     ? "bg-red-400 text-white border-green-500"
                                     : "border-red-500  text-red-500"
-                            }`}
+                                }`}
                         >
                             Furniture
                         </button>
@@ -148,8 +145,10 @@ export default function Welcome({
                         </div>
                     </div>
                 </div>
-                <section className="relative sm:flex sm:justify-center sm:items-start min-h-96 bg-dots-darker bg-center bg-gray-200 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-                    <MarqueeProduct/>
+                <section className="relative sm:flex sm:justify-center sm:items-start min-h-80 bg-dots-darker bg-center bg-gray-200 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
+                    <marquee width="100%" direction="left">
+                        <MarqueeProduct />
+                    </marquee>
                 </section>
                 <Footer />
             </WelcomLayout>

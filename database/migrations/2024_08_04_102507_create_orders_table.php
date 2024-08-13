@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->integer('quantity');
             $table->decimal('price');
+            $table->enum('payment', ['cash', 'kpay']);
+            $table->decimal('total_price')->default(0);
             $table->integer('cart_number')->unique();
             $table->timestamps();
         });

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->decimal('price');
             $table->enum('payment', ['cash', 'kpay']);
             $table->decimal('total_price')->default(0);
-            $table->integer('cart_number')->unique();
+            $table->string('cart_number');
             $table->timestamps();
         });
     }

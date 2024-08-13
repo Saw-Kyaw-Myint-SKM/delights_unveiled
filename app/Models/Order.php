@@ -15,6 +15,7 @@ class Order extends Model
         'quantity',
         'payment',
         'price',
+        'total_price',
         'cart_number',
     ];
 

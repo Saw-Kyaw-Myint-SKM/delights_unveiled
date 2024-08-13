@@ -56,6 +56,7 @@ const ShoppingCart = () => {
     const {
         data,
         setData,
+        post,
         delete: destroy,
         processing,
         reset,
@@ -79,12 +80,12 @@ const ShoppingCart = () => {
         data.payment = selectedOption;
         data.total_price = calculateTotal();
         console.log("data", data);
-        // destroy(route("profile.destroy"), {
-        //     preserveScroll: true,
-        //     onSuccess: () => closeModal(),
-        //     onError: () => passwordInput.current.focus(),
-        //     onFinish: () => reset(),
-        // });
+        post(route("order.store"), {
+            preserveScroll: true,
+            onSuccess: () => setOrderCart([]),
+            onError: () => passwordInput.current.focus(),
+            onFinish: () => reset(),
+        });
     };
 
     const closeModal = () => {

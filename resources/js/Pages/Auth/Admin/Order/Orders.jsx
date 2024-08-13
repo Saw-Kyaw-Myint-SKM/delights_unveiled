@@ -153,6 +153,12 @@ export default function Orders({ auth, orders, searchValue = "" }) {
                                                     scope="col"
                                                     className="px-4 py-3"
                                                 >
+                                                    payment
+                                                </th>
+                                                <th
+                                                    scope="col"
+                                                    className="px-4 py-3"
+                                                >
                                                     Price
                                                 </th>
                                                 <th
@@ -193,6 +199,9 @@ export default function Orders({ auth, orders, searchValue = "" }) {
                                                     </td>
                                                     <td className="px-4 py-3">
                                                         {order.quantity}
+                                                    </td>
+                                                    <td className="px-4 py-3">
+                                                        {order.payment}
                                                     </td>
                                                     <td className="px-4 py-3">
                                                         {order.price}

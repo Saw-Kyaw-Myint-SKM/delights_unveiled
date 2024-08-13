@@ -26,7 +26,7 @@ class OrderFactory extends Factory
             'quantity' => $this->faker->numberBetween(1, 10),
             'payment' => 'cash',
             'price' => $this->faker->randomFloat(2, 1, 100),
-            'cart_number' => $cartNumber,
+            'cart_number' => "$cartNumber",
         ];
     }
 }

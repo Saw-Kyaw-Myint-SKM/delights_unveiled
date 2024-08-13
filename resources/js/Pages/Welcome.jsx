@@ -7,7 +7,7 @@ import InfoCard from "@/Components/InfoCard ";
 import Footer from "@/Components/Footer";
 import { FaShippingFast, FaUndo, FaHeadset } from "react-icons/fa";
 import { CartContext } from '@/Layouts/context/CardContext';
-import ProductSlider from '@/Components/ProductSlider';
+import MarqueeProduct from '@/Components/MarqueeProduct';
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
     const productRef = useRef(null);
@@ -101,10 +101,8 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                         </div>
                     </div>
                 </div>
-                <section className="relative sm:flex sm:justify-center sm:items-start min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-                    <div className="max-w-7xl mx-auto p-6 lg:p-8">
-                        <ProductSlider/>
-                    </div>
+                <section className="relative sm:flex sm:justify-center sm:items-start min-h-96 bg-dots-darker bg-center bg-gray-200 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
+                    <MarqueeProduct/>
                 </section>
                 <Footer />
             </WelcomLayout>

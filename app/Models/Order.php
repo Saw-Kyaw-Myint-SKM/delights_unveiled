@@ -13,7 +13,9 @@ class Order extends Model
         'user_id',
         'product_id',
         'quantity',
+        'payment',
         'price',
+        'total_price',
         'cart_number',
     ];
 

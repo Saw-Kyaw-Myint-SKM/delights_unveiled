@@ -14,6 +14,8 @@ class Product extends Model
         "photo",
         'title',
         'user_id',
+        'rating',
+        'totalStar',
         'description',
         'categories',
         'total_order',

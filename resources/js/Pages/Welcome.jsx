@@ -8,6 +8,7 @@ import Footer from "@/Components/Footer";
 import { FaShippingFast, FaUndo, FaHeadset } from "react-icons/fa";
 import { CartContext } from "@/Layouts/context/CardContext";
 import { useForm } from "@inertiajs/react";
+import ProductSlider from "@/Components/ProductSlider";
 
 export default function Welcome({
     auth,

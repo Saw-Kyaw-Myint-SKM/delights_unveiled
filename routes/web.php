@@ -23,14 +23,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WelcomController::class, 'index'])->name('welcome');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/add-to-card', [AddToCardController::class, 'index'])->name('add-to-card');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/contact', [BlogController::class, 'contact'])->name('contact');
 Route::get('/product/{id}/show', [ProductController::class, 'show'])->name('product.show');
 
-Route::middleware('auth')->group(function () {
-
+Route::middleware(['auth', 'checkrole:0'])->group(function () {
+    Route::post('/orders', [OrderController::class, 'store'])->name('order.store');
+});
+Route::middleware(['auth', 'checkrole:0,1'])->group(function () {
     //product
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
     Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
@@ -38,11 +39,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/product/{id}/edit', [ProductController::class, 'edit'])->name('product.edit');
     Route::post('/product/{id}/update', [ProductController::class, 'update'])->name('product.update');
     Route::post('/product/create', [ProductController::class, 'store'])->name('product.store');
+});
+
+Route::middleware(['auth', 'checkrole:0'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
     // order
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
-    Route::post('/orders', [OrderController::class, 'store'])->name('order.store');
     Route::delete('/orders/{id}/delete', [OrderController::class, 'destroy'])->name('order.destroy');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 // User
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
@@ -51,10 +58,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/user/{id}/delete', [UserController::class, 'destroy'])->name('user.destroy');
     Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
     Route::post('/user/{id}/update', [UserController::class, 'update'])->name('user.update');
-
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__ . '/auth.php';

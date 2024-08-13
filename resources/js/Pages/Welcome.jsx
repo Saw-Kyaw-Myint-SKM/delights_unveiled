@@ -11,7 +11,9 @@ import { useForm } from "@inertiajs/react";
 import ProductSlider from "@/Components/ProductSlider";
 
 export default function Welcome({
+    user,
     auth,
+    isAuthenticated,
     laravelVersion,
     phpVersion,
     products,
@@ -55,7 +57,7 @@ export default function Welcome({
     return (
         <>
             <Head title="Delights Unveiled" />
-            <WelcomLayout searchValue={searchValue}>
+            <WelcomLayout searchValue={searchValue} user={auth.user}>
                 <section>
                     <Navbar />
                     <div

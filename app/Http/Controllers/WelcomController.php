@@ -25,6 +25,8 @@ class WelcomController extends Controller
             ->latest('id')
             ->get();
         return Inertia::render('Welcome', [
+            'user' => auth()->user(),
+            'isAuthenticated' => auth()->check(),
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
             'laravelVersion' => Application::VERSION,

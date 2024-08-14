@@ -34,4 +34,9 @@ class Product extends Model
         return $this->belongsToMany(Order::class, 'order_products')
             ->withTimestamps();
     }
+
+    public function orderProducts()
+    {
+        return $this->hasMany(OrderProduct::class);
+    }
 }

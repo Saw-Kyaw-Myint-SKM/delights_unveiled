@@ -3,6 +3,7 @@ import { Head } from "@inertiajs/react";
 import WelcomLayout from "@/Layouts/WelcomeLayout";
 import Navbar from "@/Components/Nevbar";
 import Footer from "@/Components/Footer";
+import 'aos/dist/aos.css'
 
 const Blog = ({ auth, laravelVersion, phpVersion }) => {
     return (
@@ -14,7 +15,7 @@ const Blog = ({ auth, laravelVersion, phpVersion }) => {
                     {/* Hero Section */}
                     <section className="mb-12 mx-auto px-16 py-8">
                         <div className="max-w-7xl flex flex-col md:flex-row items-center mx-auto">
-                            <div className="md:w-1/3">
+                            <div data-aos="fade-right" data-aos-duration="1000" className="md:w-1/3">
                                 <h1 className="text-4xl font-bold mb-4">The Beauty of Nature</h1>
                                 <p className="text-lg mb-6">
                                     Discover the breathtaking landscapes and serene environments that
@@ -25,7 +26,7 @@ const Blog = ({ auth, laravelVersion, phpVersion }) => {
                                     Eplore...
                                 </button>
                             </div>
-                            <div className="md:w-2/3 mt-8 md:mt-0 md:pl-8">
+                            <div data-aos="fade-left" data-aos-duration="1000" className="md:w-2/3 mt-8 md:mt-0 md:pl-8">
                                 <img
                                     src="/img/blog.jpeg"
                                     alt="Nature"
@@ -37,7 +38,7 @@ const Blog = ({ auth, laravelVersion, phpVersion }) => {
 
                     <section className="mb-12 bg-gray-200 mx-auto px-16 py-8">
                         <div className="max-w-7xl flex flex-col md:flex-row items-center  mx-auto">
-                            <div className="md:w-1/2 md:order-2">
+                            <div data-aos="fade-down-right" data-aos-duration="1000" className="md:w-1/2 md:order-2">
                                 <h2 className="text-3xl font-semibold mb-4">Majestic Mountains</h2>
                                 <p className="text-lg mb-6">
                                     Standing tall and proud, mountains are a symbol of strength and
@@ -45,8 +46,8 @@ const Blog = ({ auth, laravelVersion, phpVersion }) => {
                                     serene escape for those seeking peace.
                                 </p>
                             </div>
-                            <div className="md:w-1/2 md:order-1 mt-8 md:mt-0 md:pr-8">
-                            <div className="aspect-video">
+                            <div data-aos="fade-down-left"  data-aos-duration="1000"  className="md:w-1/2 md:order-1 mt-8 md:mt-0 md:pr-8">
+                                <div className="aspect-video">
                                     <iframe
                                         src="/video/frame_1.mp4"
                                         title="Forest Video"
@@ -60,14 +61,14 @@ const Blog = ({ auth, laravelVersion, phpVersion }) => {
 
                     <section className="mb-12 mx-auto px-16 py-8">
                         <div className="max-w-7xl flex flex-col md:flex-row items-center  mx-auto">
-                            <div className="md:w-1/2">
+                            <div data-aos="fade-up-right" data-aos-duration="1000" className="md:w-1/2">
                                 <h2 className="text-3xl font-semibold mb-4">A Journey Through the Forest</h2>
                                 <p className="text-lg mb-6">
                                     Forests are teeming with life and mystery. Watch this video to
                                     experience the lush greenery and the sounds of the forest.
                                 </p>
                             </div>
-                            <div className="md:w-1/2 mt-8 md:mt-0 md:pl-8">
+                            <div data-aos="fade-up-left" data-aos-duration="1000" className="md:w-1/2 mt-8 md:mt-0 md:pl-8">
                                 <div className="aspect-video">
                                     <iframe
                                         src="/video/frame_2.mp4"
@@ -82,7 +83,7 @@ const Blog = ({ auth, laravelVersion, phpVersion }) => {
 
                     <section className="mb-12 bg-gray-200 mx-auto px-16 py-8">
                         <div className="max-w-7xl flex flex-col md:flex-row items-center  mx-auto">
-                            <div className="md:w-1/2 md:order-2">
+                            <div  data-aos="zoom-in-down" data-aos-duration="1000" className="md:w-1/2 md:order-2">
                                 <h2 className="text-3xl font-semibold mb-4">Majestic Mountains</h2>
                                 <p className="text-lg mb-6">
                                     Standing tall and proud, mountains are a symbol of strength and
@@ -90,8 +91,8 @@ const Blog = ({ auth, laravelVersion, phpVersion }) => {
                                     serene escape for those seeking peace.
                                 </p>
                             </div>
-                            <div className="md:w-1/2 md:order-1 mt-8 md:mt-0 md:pr-8">
-                            <div className="aspect-video">
+                            <div  data-aos="zoom-in-down" data-aos-duration="1000" className="md:w-1/2 md:order-1 mt-8 md:mt-0 md:pr-8">
+                                <div className="aspect-video">
                                     <iframe
                                         src="/video/frame_3.mp4"
                                         title="Forest Video"
@@ -105,14 +106,14 @@ const Blog = ({ auth, laravelVersion, phpVersion }) => {
 
                     <section className="mb-12 mx-auto px-16 py-8">
                         <div className="max-w-7xl relative h-96 flex flex-col md:flex-row items-center  mx-auto">
-                            <div className="md:w-1/2 absolute z-20 mx-auto top-0 left-60">
+                            <div data-aos="zoom-out-up" data-aos-duration="1000"  className="md:w-1/2 absolute z-20 mx-auto top-0 left-60">
                                 <h2 className="text-3xl font-semibold mb-4">A Journey Through the Forest</h2>
                                 <p className="text-lg mb-6">
                                     Forests are teeming with life and mystery. Watch this video to
                                     experience the lush greenery and the sounds of the forest.
                                 </p>
                             </div>
-                            <div className="absolute z-0 left-60 top-44 md:w-1/2 mt-8 md:mt-0 md:pl-8">
+                            <div data-aos="fade-up" data-aos-duration="700" className="absolute z-0 left-60 top-44 md:w-1/2 mt-8 md:mt-0 md:pl-8">
                                 <div className="aspect-video">
                                     <iframe
                                         src="/video/frame_5.mp4"
@@ -122,7 +123,7 @@ const Blog = ({ auth, laravelVersion, phpVersion }) => {
                                     ></iframe>
                                 </div>
                             </div>
-                            <div className="absolute z-10 right-12 top-32 md:w-1/2 mt-8 md:mt-0 md:pl-8">
+                            <div data-aos="fade-up" data-aos-duration="500" className="absolute z-10 right-12 top-32 md:w-1/2 mt-8 md:mt-0 md:pl-8">
                                 <div className="aspect-video">
                                     <iframe
                                         src="/video/frame_4.mp4"
@@ -136,7 +137,7 @@ const Blog = ({ auth, laravelVersion, phpVersion }) => {
                     </section>
 
                     {/* Overlay Section */}
-                    <section className="mb-12 py-32 mx-auto px-16 pb-8">
+                    <section className="mb-12 py-32 mx-auto pb-8">
                         <div className="relative max-w-7xl mx-auto">
                             <img
                                 src="/img/original.png"
@@ -155,19 +156,6 @@ const Blog = ({ auth, laravelVersion, phpVersion }) => {
                         </div>
                     </section>
 
-                    {/* Conclusion Section */}
-                    <section className="mb-12 mx-auto px-16 py-8">
-                        <div className="text-center max-w-7xl  mx-auto">
-                            <h2 className="text-3xl font-semibold mb-4">Join Our Adventure</h2>
-                            <p className="text-lg mb-6">
-                                Whether you're a seasoned explorer or just starting out, there's
-                                always something new to discover in the great outdoors.
-                            </p>
-                            <button className="bg-red-500 text-white py-2 px-4 rounded-md">
-                                Subscribe Now
-                            </button>
-                        </div>
-                    </section>
                 </div>
                 <Footer />
             </WelcomLayout>

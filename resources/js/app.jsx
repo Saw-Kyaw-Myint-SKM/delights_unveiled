@@ -5,6 +5,11 @@ import { createRoot } from 'react-dom/client';
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { CartProvider } from './Layouts/context/CardContext';
+import Aos from 'aos';
+
+Aos.init({
+    duration: 1000,
+});
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 

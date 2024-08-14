@@ -6,9 +6,8 @@ import Navbar from "@/Components/Nevbar";
 import InfoCard from "@/Components/InfoCard ";
 import Footer from "@/Components/Footer";
 import { FaShippingFast, FaUndo, FaHeadset } from "react-icons/fa";
-import { CartContext } from "@/Layouts/context/CardContext";
 import { useForm } from "@inertiajs/react";
-import ProductSlider from "@/Components/ProductSlider";
+import MarqueeProduct from '@/Components/MarqueeProduct';
 
 export default function Welcome({
     user,
@@ -105,35 +104,32 @@ export default function Welcome({
                         />
                     </div>
                 </section>
-                <section className="px-16 relative sm:flex sm:justify-start sm:items-center bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-                    <div className="flex justify-start space-x-4">
+                <section className="px-16 relative sm:flex sm:justify-center sm:items-center bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
+                    <div className="flex justify-center space-x-4">
                         <button
                             onClick={() => handleCategoryChange("all")}
-                            className={`border-2 px-4 py-2 rounded font-bold ${
-                                category === "all" || category == ""
+                            className={`border-2 px-4 py-2 rounded font-bold ${category === "all" || category == ""
                                     ? "bg-red-400 text-white border-green-500"
                                     : "border-red-500 text-red-500"
-                            }`}
+                                }`}
                         >
                             All
                         </button>
                         <button
                             onClick={() => handleCategoryChange("food")}
-                            className={`border-2 px-4 py-2 rounded font-bold ${
-                                category === "food"
+                            className={`border-2 px-4 py-2 rounded font-bold ${category === "food"
                                     ? "bg-red-400 text-white border-green-500"
                                     : "border-red-500  text-red-500"
-                            }`}
+                                }`}
                         >
                             Food
                         </button>
                         <button
                             onClick={() => handleCategoryChange("furniture")}
-                            className={`border-2 px-4 py-2 rounded font-bold ${
-                                category === "furniture"
+                            className={`border-2 px-4 py-2 rounded font-bold ${category === "furniture"
                                     ? "bg-red-400 text-white border-green-500"
                                     : "border-red-500  text-red-500"
-                            }`}
+                                }`}
                         >
                             Furniture
                         </button>
@@ -151,10 +147,10 @@ export default function Welcome({
                         </div>
                     </div>
                 </div>
-                <section className="relative sm:flex sm:justify-center sm:items-start min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-                    <div className="max-w-7xl mx-auto p-6 lg:p-8">
-                        <ProductSlider />
-                    </div>
+                <section className="relative sm:flex sm:justify-center sm:items-start min-h-80 bg-dots-darker bg-center bg-gray-200 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
+                    <marquee width="100%" direction="left">
+                        <MarqueeProduct />
+                    </marquee>
                 </section>
                 <Footer />
             </WelcomLayout>

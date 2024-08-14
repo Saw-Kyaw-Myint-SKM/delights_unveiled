@@ -102,8 +102,8 @@ export default function Welcome({
                         />
                     </div>
                 </section>
-                <section className="px-16 relative sm:flex sm:justify-start sm:items-center bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-                    <div className="flex justify-start space-x-4">
+                <section className="px-16 relative sm:flex sm:justify-center sm:items-center bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
+                    <div className="flex justify-center space-x-4">
                         <button
                             onClick={() => handleCategoryChange("all")}
                             className={`border-2 px-4 py-2 rounded font-bold ${category === "all" || category == ""

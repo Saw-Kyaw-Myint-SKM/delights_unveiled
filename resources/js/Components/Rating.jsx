@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Rating = ({ rating = 0, totalStars = 5, off = false }) => {
+const Rating = ({ rating = 0, totalStars = 5, off = true }) => {
   const [currentRating, setCurrentRating] = useState(rating);
 
   // Function to handle the star click

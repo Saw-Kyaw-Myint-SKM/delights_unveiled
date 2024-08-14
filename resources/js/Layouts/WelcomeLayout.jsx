@@ -10,7 +10,12 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { CartContext } from "./context/CardContext";
 import { useForm } from "@inertiajs/react";
 
-export default function Authenticated({ header, children, searchValue = "" }) {
+export default function Authenticated({
+    user,
+    header,
+    children,
+    searchValue = "",
+}) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
     const [animate, setAnimate] = useState(false);
@@ -95,71 +100,114 @@ export default function Authenticated({ header, children, searchValue = "" }) {
                             </form>
                         </div>
                         <div className="flex sm:items-center sm:ms-6">
-                            <div className="flex items-center space-x-4">
-                                <Link
-                                    href={route("add-to-card")}
-                                    className="text-gray-700 mr-2"
-                                >
-                                    <div className="flex justify-center items-center">
-                                        <div className="relative inline-block">
-                                            <div
-                                                className={`transform ${
-                                                    animate ? "scale-125" : ""
-                                                } transition-transform duration-300`}
-                                            >
-                                                <MdOutlineShoppingCart
-                                                    size={20}
-                                                />
-                                                {cartCount > 0 && (
-                                                    <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-600 text-white text-xs rounded-full  px-1.5 py-0">
-                                                        {cartCount}
-                                                    </span>
-                                                )}
+                            {(!user?.email || !user?.role == 0) && (
+                                <div className="flex items-center space-x-4">
+                                    <Link
+                                        href={route("add-to-card")}
+                                        className="text-gray-700 mr-2"
+                                    >
+                                        <div className="flex justify-center items-center">
+                                            <div className="relative inline-block">
+                                                <div
+                                                    className={`transform ${
+                                                        animate
+                                                            ? "scale-125"
+                                                            : ""
+                                                    } transition-transform duration-300`}
+                                                >
+                                                    <MdOutlineShoppingCart
+                                                        size={20}
+                                                    />
+                                                    {cartCount > 0 && (
+                                                        <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-600 text-white text-xs rounded-full  px-1.5 py-0">
+                                                            {cartCount}
+                                                        </span>
+                                                    )}
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </Link>
-                            </div>
-                            <div className="hidden sm:flex ms-3 relative">
-                                <Dropdown>
-                                    <Dropdown.Trigger>
-                                        <span className="inline-flex rounded-md">
-                                            <button
-                                                type="button"
-                                                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
-                                            >
-                                                ughand
-                                                <svg
-                                                    className="ms-2 -me-0.5 h-4 w-4"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20"
-                                                    fill="currentColor"
-                                                >
-                                                    <path
-                                                        fillRule="evenodd"
-                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                        clipRule="evenodd"
-                                                    />
-                                                </svg>
-                                            </button>
-                                        </span>
-                                    </Dropdown.Trigger>
+                                    </Link>
+                                </div>
+                            )}
 
-                                    <Dropdown.Content>
-                                        <Dropdown.Link
-                                            href={route("profile.edit")}
+                            <div className="hidden sm:flex ms-3 relative">
+                                {!user?.name && (
+                                    <>
+                                        <Link
+                                            href={route("login")}
+                                            className="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-5 rounded-full"
                                         >
-                                            Profile
-                                        </Dropdown.Link>
-                                        <Dropdown.Link
-                                            href={route("logout")}
-                                            method="post"
-                                            as="button"
-                                        >
-                                            Log Out
-                                        </Dropdown.Link>
-                                    </Dropdown.Content>
-                                </Dropdown>
+                                            login
+                                        </Link>
+                                    </>
+                                )}
+                                {user?.name && (
+                                    <>
+                                        <Dropdown>
+                                            <Dropdown.Trigger>
+                                                <span className="inline-flex rounded-md">
+                                                    <button
+                                                        type="button"
+                                                        className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
+                                                    >
+                                                        {user.name}
+                                                        <svg
+                                                            className="ms-2 -me-0.5 h-4 w-4"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            viewBox="0 0 20 20"
+                                                            fill="currentColor"
+                                                        >
+                                                            <path
+                                                                fillRule="evenodd"
+                                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                                clipRule="evenodd"
+                                                            />
+                                                        </svg>
+                                                    </button>
+                                                </span>
+                                            </Dropdown.Trigger>
+
+                                            <Dropdown.Content>
+                                                {user?.email &&
+                                                    [1, 0].includes(
+                                                        user.role
+                                                    ) && (
+                                                        <>
+                                                            <Dropdown.Link
+                                                                href={
+                                                                    user.role ==
+                                                                    1
+                                                                        ? route(
+                                                                              "products.index"
+                                                                          )
+                                                                        : route(
+                                                                              "dashboard"
+                                                                          )
+                                                                }
+                                                            >
+                                                                Dashboard
+                                                            </Dropdown.Link>
+                                                        </>
+                                                    )}
+                                                <Dropdown.Link
+                                                    href={route(
+                                                        "user.profile.edit"
+                                                    )}
+                                                >
+                                                    Profile
+                                                </Dropdown.Link>
+
+                                                <Dropdown.Link
+                                                    href={route("logout")}
+                                                    method="post"
+                                                    as="button"
+                                                >
+                                                    Log Out
+                                                </Dropdown.Link>
+                                            </Dropdown.Content>
+                                        </Dropdown>
+                                    </>
+                                )}
                             </div>
                         </div>
 
@@ -237,7 +285,9 @@ export default function Authenticated({ header, children, searchValue = "" }) {
                             <ResponsiveNavLink href={route("contact")}>
                                 Contact Us
                             </ResponsiveNavLink>
-                            <ResponsiveNavLink href={route("profile.edit")}>
+                            <ResponsiveNavLink
+                                href={route("user.profile.edit")}
+                            >
                                 Profile
                             </ResponsiveNavLink>
                             <ResponsiveNavLink

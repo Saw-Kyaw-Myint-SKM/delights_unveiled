@@ -30,8 +30,9 @@ class DatabaseSeeder extends Seeder
             'role' => 1,
         ]);
 
-        \App\Models\User::factory(10)->create();
-        \App\Models\Product::factory(10)->create();
-        \App\Models\Order::factory(10)->create();
+        \App\Models\User::factory(5)->create();
+        \App\Models\Product::factory(5)->create();
+        \App\Models\Order::factory(5)->create();
+        \App\Models\OrderProduct::factory(5)->create();
     }
 }

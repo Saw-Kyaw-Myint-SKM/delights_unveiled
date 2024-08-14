@@ -52,8 +52,8 @@ class DashboardController extends Controller
         }
         $totalPrice = Order::whereBetween('created_at', [$startOfMonth, $endOfMonth])
             ->distinct('cart_number')
-            ->select(DB::raw('SUM(quantity * price) as total_price'))
-            ->value('total_price');
+            ->select(DB::raw('SUM(total_price) as total_prices'))
+            ->value('total_prices');
 
         return Inertia::render('Dashboard', [
             'totalUser' => $totalUser,

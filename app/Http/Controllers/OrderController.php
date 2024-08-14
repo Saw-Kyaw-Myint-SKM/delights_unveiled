@@ -15,12 +15,13 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $searchTerm = $request->input('search');
-        $orders = Order::with(['user', 'product'])
+        $orders = Order::with(['user', 'products'])
             ->whereHas('user', function ($query) use ($searchTerm) {
                 $query->where('name', 'like', "%{$searchTerm}%");
             })
             ->latest('id')
             ->get();
+
         return Inertia::render('Auth/Admin/Order/Orders', [
             'orders' => $orders,
             'searchValue' => $searchTerm,

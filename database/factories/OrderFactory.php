@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Order;
-use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,10 +21,10 @@ class OrderFactory extends Factory
         $cartNumber = $this->faker->unique()->numberBetween(1, 10000);
         return [
             'user_id' => User::factory(),
-            'product_id' => Product::factory(),
-            'quantity' => $this->faker->numberBetween(1, 10),
+            'phone' => "09" . $this->faker->numberBetween(100000000, 999999999),
             'payment' => 'cash',
-            'price' => $this->faker->randomFloat(2, 1, 100),
+            'address' => 'ddd',
+            'total_price' => $this->faker->randomFloat(2, 1, 100),
             'cart_number' => "$cartNumber",
         ];
     }

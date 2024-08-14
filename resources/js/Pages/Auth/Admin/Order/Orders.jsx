@@ -123,19 +123,13 @@ export default function Orders({ auth, orders, searchValue = "" }) {
                                                     scope="col"
                                                     className="px-4 py-3"
                                                 >
-                                                    Order No
+                                                    Cart No
                                                 </th>
                                                 <th
                                                     scope="col"
                                                     className="px-4 py-3"
                                                 >
-                                                    Product
-                                                </th>
-                                                <th
-                                                    scope="col"
-                                                    className="px-4 py-3"
-                                                >
-                                                    product name
+                                                    Cart
                                                 </th>
                                                 <th
                                                     scope="col"
@@ -147,7 +141,13 @@ export default function Orders({ auth, orders, searchValue = "" }) {
                                                     scope="col"
                                                     className="px-4 py-3"
                                                 >
-                                                    quantity
+                                                    Address
+                                                </th>
+                                                <th
+                                                    scope="col"
+                                                    className="px-4 py-3"
+                                                >
+                                                    Phone
                                                 </th>
                                                 <th
                                                     scope="col"
@@ -159,7 +159,7 @@ export default function Orders({ auth, orders, searchValue = "" }) {
                                                     scope="col"
                                                     className="px-4 py-3"
                                                 >
-                                                    Price
+                                                    Total Price
                                                 </th>
                                                 <th
                                                     scope="col"
@@ -176,35 +176,33 @@ export default function Orders({ auth, orders, searchValue = "" }) {
                                                     className="border-b dark:border-gray-700"
                                                 >
                                                     <td className="px-4 py-3">
-                                                        {order.cart_number}
+                                                        {order.id}
                                                     </td>
                                                     <th
                                                         scope="row"
                                                         className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                                     >
                                                         <img
-                                                            className=" w-24 h-24"
-                                                            src={
-                                                                order.product
-                                                                    ?.photo
-                                                            }
+                                                            className="w-16 h-16 animate-bounce"
+                                                            src="https://cdn-icons-png.flaticon.com/512/3481/3481069.png"
                                                             alt="order"
                                                         />
+                                                        <div className="w-full h-[1px] bg-gray-200 mt-[-8px]"></div>
                                                     </th>
-                                                    <td className="px-4 py-3">
-                                                        {order.product?.title}
-                                                    </td>
                                                     <td className="px-4 py-3">
                                                         {order.user.name}
                                                     </td>
                                                     <td className="px-4 py-3">
-                                                        {order.quantity}
+                                                        {order.address}
+                                                    </td>
+                                                    <td className="px-4 py-3">
+                                                        {order.phone}
                                                     </td>
                                                     <td className="px-4 py-3">
                                                         {order.payment}
                                                     </td>
                                                     <td className="px-4 py-3">
-                                                        {order.price}
+                                                        {order.total_price}
                                                     </td>
                                                     <td className="px-4 py-3 w-12 ">
                                                         <div className="flex items-center">

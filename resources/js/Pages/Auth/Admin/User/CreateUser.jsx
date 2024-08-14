@@ -29,7 +29,7 @@ export default function CreateProduct({ auth }) {
     } = useForm({
         user_name: "",
         email: "",
-        role: roleList[user.role],
+        role: roleList[auth.user.role],
         password: "",
     });
 

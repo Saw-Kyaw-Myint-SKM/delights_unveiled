@@ -23,12 +23,19 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WelcomController::class, 'index'])->name('welcome');
 
-Route::get('/add-to-card', [AddToCardController::class, 'index'])->name('add-to-card');
+Route::get('/add-to-cart', [AddToCardController::class, 'index'])->name('add-to-card');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/contact', [BlogController::class, 'contact'])->name('contact');
 Route::get('/product/{id}/show', [ProductController::class, 'show'])->name('product.show');
 
-Route::middleware(['auth', 'checkrole:0'])->group(function () {
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/user/profile', [ProfileController::class, 'userProfile'])->name('user.profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware(['auth', 'checkrole:2'])->group(function () {
     Route::post('/orders', [OrderController::class, 'store'])->name('order.store');
 });
 Route::middleware(['auth', 'checkrole:0,1'])->group(function () {
@@ -47,9 +54,6 @@ Route::middleware(['auth', 'checkrole:0'])->group(function () {
     // order
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::delete('/orders/{id}/delete', [OrderController::class, 'destroy'])->name('order.destroy');
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 // User
     Route::get('/users', [UserController::class, 'index'])->name('users.index');

@@ -100,31 +100,36 @@ export default function Authenticated({
                             </form>
                         </div>
                         <div className="flex sm:items-center sm:ms-6">
-                            <div className="flex items-center space-x-4">
-                                <Link
-                                    href={route("add-to-card")}
-                                    className="text-gray-700 mr-2"
-                                >
-                                    <div className="flex justify-center items-center">
-                                        <div className="relative inline-block">
-                                            <div
-                                                className={`transform ${
-                                                    animate ? "scale-125" : ""
-                                                } transition-transform duration-300`}
-                                            >
-                                                <MdOutlineShoppingCart
-                                                    size={20}
-                                                />
-                                                {cartCount > 0 && (
-                                                    <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-600 text-white text-xs rounded-full  px-1.5 py-0">
-                                                        {cartCount}
-                                                    </span>
-                                                )}
+                            {(!user?.email || !user?.role == 0) && (
+                                <div className="flex items-center space-x-4">
+                                    <Link
+                                        href={route("add-to-card")}
+                                        className="text-gray-700 mr-2"
+                                    >
+                                        <div className="flex justify-center items-center">
+                                            <div className="relative inline-block">
+                                                <div
+                                                    className={`transform ${
+                                                        animate
+                                                            ? "scale-125"
+                                                            : ""
+                                                    } transition-transform duration-300`}
+                                                >
+                                                    <MdOutlineShoppingCart
+                                                        size={20}
+                                                    />
+                                                    {cartCount > 0 && (
+                                                        <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-600 text-white text-xs rounded-full  px-1.5 py-0">
+                                                            {cartCount}
+                                                        </span>
+                                                    )}
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </Link>
-                            </div>
+                                    </Link>
+                                </div>
+                            )}
+
                             <div className="hidden sm:flex ms-3 relative">
                                 {!user?.name && (
                                     <>
@@ -185,7 +190,9 @@ export default function Authenticated({
                                                         </>
                                                     )}
                                                 <Dropdown.Link
-                                                    href={route("profile.edit")}
+                                                    href={route(
+                                                        "user.profile.edit"
+                                                    )}
                                                 >
                                                     Profile
                                                 </Dropdown.Link>
@@ -278,7 +285,9 @@ export default function Authenticated({
                             <ResponsiveNavLink href={route("contact")}>
                                 Contact Us
                             </ResponsiveNavLink>
-                            <ResponsiveNavLink href={route("profile.edit")}>
+                            <ResponsiveNavLink
+                                href={route("user.profile.edit")}
+                            >
                                 Profile
                             </ResponsiveNavLink>
                             <ResponsiveNavLink

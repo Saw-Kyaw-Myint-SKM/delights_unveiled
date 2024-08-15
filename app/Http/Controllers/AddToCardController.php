@@ -8,8 +8,8 @@ class AddToCardController extends Controller
 {
     public function index()
     {
-        if (auth()->user()->role == 0) {
-            return redirect()->route('welcom');
+        if (auth()->check() && auth()->user()->role == 0) {
+            return redirect()->route('welcome');
         }
 
         return Inertia::render('Auth/AddToCard');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreOrderRequest;
 use App\Models\Order;
+use App\Models\OrderProduct;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -45,16 +46,19 @@ class OrderController extends Controller
         $firstLetter = substr(auth()->user()->name, 0, 1);
         $randomNumber = mt_rand(1000, 9999);
         $cart_number = $userId . $firstLetter . $randomNumber;
-
-        foreach ($request->orders as $key => $order) {
-            Order::create([
-                'user_id' => auth()->user()->id,
-                'product_id' => $order['id'],
-                'quantity' => $order['quantity'],
-                'price' => $order['price'],
-                'payment' => $request->payment,
-                'total_price' => $request->total_price,
-                'cart_number' => $cart_number,
+        $order = Order::create(['user_id' => auth()->user()->id,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'payment' => $request->payment,
+            'total_price' => $request->total_price,
+            'cart_number' => $cart_number,
+        ]);
+        foreach ($request->orders as $key => $product) {
+            OrderProduct::create([
+                "order_id" => $order->id,
+                "product_id" => $product['id'],
+                "quantity" => $product['quantity'],
+                "price" => $product['price'],
             ]);
         }
 

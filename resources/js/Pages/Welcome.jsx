@@ -59,19 +59,26 @@ export default function Welcome({
             <WelcomLayout searchValue={searchValue} user={auth.user}>
                 <section>
                     <Navbar />
-                    <div
-                        className="w-full mx-auto bg-cover bg-center  flex flex-col justify-end h-[60vh]"
-                        style={{
-                            backgroundImage: "url('/img/leading_photo.png')",
-                        }}
-                    >
-                        <header className="pl-16 pr-16 pt-5 pb-5">
-                            <h1 className="text-base md:text-4xl font-bold">
+                    <div className="w-full mx-auto h-[60vh] relative flex flex-col justify-end">
+                        {/* Hero Video */}
+                        <video
+                            className="absolute top-0 left-0 w-full h-full object-cover"
+                            src="/video/hero.mp4"
+                            autoPlay
+                            loop
+                            muted
+                        />
+
+                        {/* Dark Overlay */}
+                        <div className="absolute top-0 left-0 w-full h-full bg-black opacity-30"></div>
+
+                        {/* Overlay Content */}
+                        <header className="relative z-10 pl-16 pr-16 pt-5 pb-5">
+                            <h1 className="text-base md:text-4xl font-bold text-white">
                                 Best Collection For Home Decoration
                             </h1>
-                            <p className="text-gray-600 text-sm md:text-lg">
-                                Lorem, ipsum dolor sit amet consectetur
-                                adipisicing elit...
+                            <p className="text-gray-300 text-sm md:text-lg">
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit...
                             </p>
                             <button
                                 className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4"
@@ -86,7 +93,7 @@ export default function Welcome({
                     ref={productRef}
                     className="px-16 relative sm:flex sm:justify-center sm:items-center bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white mb-7"
                 >
-                    <div className="p-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div data-aos="fade-down" data-aos-duration="800" className="p-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         <InfoCard
                             icon={<FaShippingFast className="w-8 h-8" />}
                             title="Free Shipping"
@@ -109,8 +116,8 @@ export default function Welcome({
                         <button
                             onClick={() => handleCategoryChange("all")}
                             className={`border-2 px-4 py-2 rounded font-bold ${category === "all" || category == ""
-                                    ? "bg-red-400 text-white border-green-500"
-                                    : "border-red-500 text-red-500"
+                                ? "bg-red-400 text-white border-green-500"
+                                : "border-red-500 text-red-500"
                                 }`}
                         >
                             All
@@ -118,8 +125,8 @@ export default function Welcome({
                         <button
                             onClick={() => handleCategoryChange("food")}
                             className={`border-2 px-4 py-2 rounded font-bold ${category === "food"
-                                    ? "bg-red-400 text-white border-green-500"
-                                    : "border-red-500  text-red-500"
+                                ? "bg-red-400 text-white border-green-500"
+                                : "border-red-500  text-red-500"
                                 }`}
                         >
                             Food
@@ -127,8 +134,8 @@ export default function Welcome({
                         <button
                             onClick={() => handleCategoryChange("furniture")}
                             className={`border-2 px-4 py-2 rounded font-bold ${category === "furniture"
-                                    ? "bg-red-400 text-white border-green-500"
-                                    : "border-red-500  text-red-500"
+                                ? "bg-red-400 text-white border-green-500"
+                                : "border-red-500  text-red-500"
                                 }`}
                         >
                             Furniture

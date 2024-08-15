@@ -67,7 +67,7 @@ export default function Authenticated({
                             <div className="space-x-8 sm:-my-px sm:flex">
                                 <NavLink
                                     href={route("welcome")}
-                                    active={route().current("welcome")}
+                                    // active={route().current("welcome")}
                                 >
                                     <span className="text-base md:text-lg text-red-500 font-bold">
                                         Delights

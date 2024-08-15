@@ -10,6 +10,7 @@ const ProductCard = ({ products, onAddToCart }) => {
         <>
             {products.map((product) => (
                 <div
+                    data-aos="zoom-out"
                     key={product.id}
                     className="max-w-sm rounded overflow-hidden shadow-lg"
                 >

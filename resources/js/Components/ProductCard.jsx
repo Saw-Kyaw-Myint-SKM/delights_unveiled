@@ -10,12 +10,13 @@ const ProductCard = ({ products, onAddToCart }) => {
         <>
             {products.map((product) => (
                 <div
-                    data-aos="zoom-out"
+                    data-aos="fade-up"
+                    data-aos-anchor-placement="top-bottom"
+                    data-aos-delay="200"
                     key={product.id}
                     className="max-w-sm rounded overflow-hidden shadow-lg"
                 >
                     <Link href={route("product.show", product.id)}>
-                        {/*<img className="w-full" src={product.image} alt={product.name} />*/}
                         <img className="w-full" src={product.photo} />
                         <div className="p-4">
                             <div className="text-black dark:text-gray-100 font-bold text-xl mb-1">

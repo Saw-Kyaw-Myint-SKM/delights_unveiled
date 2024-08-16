@@ -22,16 +22,13 @@ export default function Welcome({ auth, product }) {
                 <div className="container max-w-7xl mx-auto px-4 py-10">
                     <section>
                         <div className="flex flex-col lg:flex-row px-16">
-                            {/* Product Image and Thumbnails */}
-                            <div className="w-full mb-10 lg:w-2/5">
+                            <div data-aos="fade-right" data-aos-duration="1000" className="w-full mb-10 lg:w-2/5">
                                 <img
                                     className="w-full"
-                                    src="/img/original.png"
+                                    src={product.photo}
                                 />
                             </div>
-
-                            {/* Product Details */}
-                            <div className="w-full lg:w-3/5 lg:pl-10">
+                            <div data-aos="fade-left" data-aos-duration="1000" className="w-full lg:w-3/5 lg:pl-10">
                                 <h1 className="text-2xl font-bold text-red-500 mb-4">
                                     {product.title}
                                 </h1>

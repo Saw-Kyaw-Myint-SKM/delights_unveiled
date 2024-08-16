@@ -7,7 +7,7 @@ import InfoCard from "@/Components/InfoCard ";
 import Footer from "@/Components/Footer";
 import { FaShippingFast, FaUndo, FaHeadset } from "react-icons/fa";
 import { useForm } from "@inertiajs/react";
-import MarqueeProduct from '@/Components/MarqueeProduct';
+import Carousel from "@/Components/Carousel";
 
 export default function Welcome({
     user,
@@ -93,7 +93,7 @@ export default function Welcome({
                     ref={productRef}
                     className="px-16 relative sm:flex sm:justify-center sm:items-center bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white mb-7"
                 >
-                    <div data-aos="fade-down" data-aos-duration="800" className="p-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="p-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         <InfoCard
                             icon={<FaShippingFast className="w-8 h-8" />}
                             title="Free Shipping"
@@ -114,6 +114,8 @@ export default function Welcome({
                 <section className="px-16 relative sm:flex sm:justify-center sm:items-center bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
                     <div className="flex justify-center space-x-4">
                         <button
+                            data-aos="fade-right"
+                            data-aos-delay="500"
                             onClick={() => handleCategoryChange("all")}
                             className={`border-2 px-4 py-2 rounded font-bold ${category === "all" || category == ""
                                 ? "bg-red-400 text-white border-green-500"
@@ -123,6 +125,8 @@ export default function Welcome({
                             All
                         </button>
                         <button
+                            data-aos="fade-right"
+                            data-aos-delay="400"
                             onClick={() => handleCategoryChange("food")}
                             className={`border-2 px-4 py-2 rounded font-bold ${category === "food"
                                 ? "bg-red-400 text-white border-green-500"
@@ -132,6 +136,8 @@ export default function Welcome({
                             Food
                         </button>
                         <button
+                            data-aos="fade-right"
+                            data-aos-delay="200"
                             onClick={() => handleCategoryChange("furniture")}
                             className={`border-2 px-4 py-2 rounded font-bold ${category === "furniture"
                                 ? "bg-red-400 text-white border-green-500"
@@ -154,10 +160,8 @@ export default function Welcome({
                         </div>
                     </div>
                 </div>
-                <section className="relative sm:flex sm:justify-center sm:items-start min-h-80 bg-dots-darker bg-center bg-gray-200 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-                    <marquee width="100%" direction="left">
-                        <MarqueeProduct />
-                    </marquee>
+                <section className="relative sm:flex sm:justify-center sm:items-start bg-dots-darker bg-center bg-gray-200 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white py-10">
+                    <Carousel />
                 </section>
                 <Footer />
             </WelcomLayout>

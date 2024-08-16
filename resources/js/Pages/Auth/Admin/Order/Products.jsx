@@ -72,21 +72,30 @@ export default function Products({ auth, order }) {
                                             {order.id}
                                         </p>
                                     </div>
-
-                                    <marquee behavior="" direction="right">
-                                        <div className="flex items-center">
-                                            <img
-                                                className="w-12 h-12 mr-7"
-                                                src="https://cdn-icons-png.flaticon.com/512/3481/3481069.png"
-                                                alt="order"
-                                            />
-                                            <img
-                                                className="w-12 h-12"
-                                                src="https://cdn-icons-png.flaticon.com/512/3481/3481069.png"
-                                                alt="order"
-                                            />
-                                        </div>
-                                    </marquee>
+                                    <div className="w-full">
+                                        <marquee behavior="" direction="right">
+                                            <div className="flex items-center">
+                                                <img
+                                                    className="w-12 h-12 mr-7"
+                                                    src="https://cdn-icons-png.flaticon.com/512/3481/3481069.png"
+                                                    alt="order"
+                                                />
+                                                <img
+                                                    className="w-12 h-12"
+                                                    src="https://cdn-icons-png.flaticon.com/512/3481/3481069.png"
+                                                    alt="order"
+                                                />
+                                            </div>
+                                        </marquee>
+                                    </div>
+                                    <div className="w-32">
+                                        <p className="text-gray-500 text-sm">
+                                            Total Price
+                                        </p>
+                                        <p className="font-bold font-mono text-xl text-blue-600">
+                                            {order.total_price}
+                                        </p>
+                                    </div>
                                 </div>
                                 <div className="overflow-x-auto">
                                     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">

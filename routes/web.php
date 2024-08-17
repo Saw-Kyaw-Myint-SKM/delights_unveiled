@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AddToCardController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderProductController;
@@ -28,6 +29,7 @@ Route::get('/add-to-cart', [AddToCardController::class, 'index'])->name('add-to-
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/contact', [BlogController::class, 'contact'])->name('contact');
 Route::get('/product/{id}/show', [ProductController::class, 'show'])->name('product.show');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

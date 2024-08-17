@@ -273,15 +273,17 @@ const ShoppingCart = () => {
             </div>
             <Modal show={confirmingPayment} onClose={closeModal} maxWidth="md">
                 <form className="p-6">
-                    <h2 className="text-lg font-medium text-gray-900">
-                        Are you sure you want to delete your account?
+                    <h2 className="text-lg text-red-600 font-bold">
+                        Delights Unveiled
                     </h2>
 
                     <p className="mt-1 text-sm text-gray-600">
-                        Once your account is deleted, all of its resources and
-                        data will be permanently deleted. Please enter your
-                        password to confirm you would like to permanently delete
-                        your account.
+                        Are you sure you want to place this order? Click confirm
+                        to{" "}
+                        <span className="font-semibold text-gray-800 text-base">
+                            Save Order
+                        </span>{" "}
+                        button.
                     </p>
                     <div className="flex items-center justify-center">
                         {selectedOption == "kpay" && (

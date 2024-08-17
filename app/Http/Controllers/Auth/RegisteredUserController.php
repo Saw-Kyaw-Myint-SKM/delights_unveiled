@@ -47,6 +47,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::PRODUCT);
+        return redirect(RouteServiceProvider::WELCOME);
     }
 }

@@ -63,6 +63,8 @@ const ShoppingCart = () => {
         errors,
     } = useForm({
         orders: "",
+        phone: "",
+        address: "",
         total_price: "",
         payment: "",
     });
@@ -79,12 +81,12 @@ const ShoppingCart = () => {
         data.orders = extractedData;
         data.payment = selectedOption;
         data.total_price = calculateTotal();
-        console.log("data", data);
         post(route("order.store"), {
             preserveScroll: true,
             onSuccess: () => setOrderCart([]),
-            onError: () => passwordInput.current.focus(),
-            onFinish: () => reset(),
+            onError: (errors) => {
+                closeModal();
+            },
         });
     };
 
@@ -189,6 +191,37 @@ const ShoppingCart = () => {
                         {calculateTotal()} Ks
                     </span>
                 </div>
+                <div>
+                    <InputLabel htmlFor="phone" value="Phone" />
+
+                    <TextInput
+                        id="phone"
+                        name="phone"
+                        value={data.phone}
+                        className="mt-1 block w-full"
+                        autoComplete="phone"
+                        isFocused={true}
+                        onChange={(e) => setData("phone", e.target.value)}
+                        required
+                    />
+
+                    <InputError message={errors.phone} className="mt-2" />
+                </div>
+                <div className="mt-2">
+                    <InputLabel htmlFor="address" value="Address" />
+
+                    <TextInput
+                        id="address"
+                        name="addres"
+                        value={data.address}
+                        className="mt-1 block w-full"
+                        autoComplete="address"
+                        onChange={(e) => setData("address", e.target.value)}
+                        required
+                    />
+
+                    <InputError message={errors.address} className="mt-2" />
+                </div>
                 <div className="mb-10 mt-5 flex items-center space-x-2">
                     <div>
                         <label className="text-md mt-1">
@@ -239,7 +272,7 @@ const ShoppingCart = () => {
                 </button>
             </div>
             <Modal show={confirmingPayment} onClose={closeModal} maxWidth="md">
-                <form onSubmit={submitOrder} className="p-6">
+                <form className="p-6">
                     <h2 className="text-lg font-medium text-gray-900">
                         Are you sure you want to delete your account?
                     </h2>
@@ -273,6 +306,7 @@ const ShoppingCart = () => {
 
                         <PrimaryButton
                             className="ms-3 bg-blue-600"
+                            onClick={submitOrder}
                             disabled={processing}
                         >
                             Save Order

@@ -4,6 +4,7 @@ use App\Http\Controllers\AddToCardController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderProductController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -53,6 +54,7 @@ Route::middleware(['auth', 'checkrole:0'])->group(function () {
 
     // order
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/order/{id}/products', [OrderProductController::class, 'show'])->name('order.products.show');
     Route::delete('/orders/{id}/delete', [OrderController::class, 'destroy'])->name('order.destroy');
 
 // User

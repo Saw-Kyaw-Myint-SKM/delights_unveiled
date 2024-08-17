@@ -12,9 +12,8 @@ class Order extends Model
     protected $fillable = [
         'user_id',
         'product_id',
-        'quantity',
-        'payment',
-        'price',
+        'phone',
+        'address',
         'total_price',
         'cart_number',
     ];
@@ -30,8 +29,13 @@ class Order extends Model
     /**
      * Get the product associated with the order.
      */
-    public function product()
+    public function products()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsToMany(Product::class, 'order_products')
+            ->withTimestamps();
+    }
+    public function orderProducts()
+    {
+        return $this->hasMany(OrderProduct::class);
     }
 }

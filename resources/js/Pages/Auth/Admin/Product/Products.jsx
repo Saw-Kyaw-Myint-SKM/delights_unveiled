@@ -182,7 +182,7 @@ export default function Products({ auth, products, searchValue = "" }) {
                                                 >
                                                     <td className="px-4 py-3">
                                                         <img
-                                                            className=" w-32 h-32"
+                                                            className="w-20 h-20 max-w-24 min-w-20"
                                                             src={product.photo}
                                                             alt="product"
                                                         />

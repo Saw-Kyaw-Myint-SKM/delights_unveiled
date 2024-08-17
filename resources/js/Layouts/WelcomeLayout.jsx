@@ -137,7 +137,7 @@ export default function Authenticated({
                                             href={route("login")}
                                             className="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-5 rounded-full"
                                         >
-                                            login
+                                            Login
                                         </Link>
                                     </>
                                 )}

@@ -149,7 +149,7 @@ const Blog = ({ auth, laravelVersion, phpVersion }) => {
                         </div>
                     </section>
 
-                    <section className="mb-12 mx-auto px-16 py-8">
+                    {/* <section className="mb-12 mx-auto px-16 py-8">
                         <div className="max-w-7xl relative h-96 flex flex-col md:flex-row items-center  mx-auto">
                             <div
                                 data-aos="zoom-out-up"
@@ -194,7 +194,53 @@ const Blog = ({ auth, laravelVersion, phpVersion }) => {
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </section> */}
+
+<section className="mb-12 mx-auto px-4 sm:px-8 lg:px-16 py-8">
+    <div className="max-w-7xl lg:relative lg:h-96 flex flex-col items-center mx-auto">
+        <div
+            data-aos="zoom-out-up"
+            data-aos-duration="1000"
+            className="lg:md:w-1/2 lg:absolute lg:z-20 lg:top-0 lg:left-1/4 lg:transform lg:-translate-x-1/2 lg:mx-auto text-center lg:text-left"
+        >
+            <h2 className="text-2xl sm:text-3xl font-semibold mb-4">
+                A Journey Through the Forest
+            </h2>
+            <p className="text-base sm:text-lg mb-6">
+                Forests are teeming with life and mystery. Watch this video to experience the lush greenery and the sounds of the forest.
+            </p>
+        </div>
+        <div
+            data-aos="fade-up"
+            data-aos-duration="700"
+            className="lg:absolute lg:z-0 lg:transform lg:-translate-x-1/2  lg:left-36 lg:top-44 lg:w-1/2 mt-8 mb-5 md:mt-0 md:pl-8"
+                     
+        >
+            <div className="aspect-video">
+                <iframe
+                    src="/video/frame_5.mp4"
+                    title="Forest Video"
+                    className="w-auto h-full rounded-lg shadow-lg"
+                    allowFullScreen
+                ></iframe>
+            </div>
+        </div>
+        <div
+            data-aos="fade-up"
+            data-aos-duration="500"
+            className="lg:absolute lg:z-10 lg:right-0 lg:top-32 lg:transform lg:translate-x-1/2 lg:w-1/2 mt-8 md:mt-0 md:pl-8"
+        >
+            <div className="aspect-video">
+                <iframe
+                    src="/video/frame_4.mp4"
+                    title="Forest Video"
+                    className="w-auto h-full rounded-lg shadow-lg"
+                    allowFullScreen
+                ></iframe>
+            </div>
+        </div>
+    </div>
+</section>
 
                     {/* Overlay Section */}
                     <section className="mb-12 py-32 mx-auto pb-8">

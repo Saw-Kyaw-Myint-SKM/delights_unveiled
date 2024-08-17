@@ -189,7 +189,7 @@ export default function Orders({ auth, orders, searchValue = "" }) {
                                                             )}
                                                         >
                                                             <img
-                                                                className="w-16 h-16 animate-bounce"
+                                                                className="w-auto h-auto max-w-14 max-h-14 animate-bounce"
                                                                 src="https://cdn-icons-png.flaticon.com/512/3481/3481069.png"
                                                                 alt="order"
                                                             />

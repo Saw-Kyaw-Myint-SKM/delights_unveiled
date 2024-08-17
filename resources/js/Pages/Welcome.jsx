@@ -154,7 +154,7 @@ export default function Welcome({
                 >
                     <div className="max-w-7xl mx-auto p-6 lg:p-8">
                         <div className="">
-                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8 justify-items-center">
                                 <ProductCard products={products} />
                             </div>
                         </div>

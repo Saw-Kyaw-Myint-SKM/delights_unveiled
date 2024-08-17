@@ -64,7 +64,7 @@ export default function Products({ auth, order }) {
                         <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
                             <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
                                 <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-1 md:space-x-4 p-4">
-                                    <div className="w-16">
+                                    <div className="w-auto">
                                         <p className=" text-xs text-gray-600">
                                             Cart No
                                         </p>
@@ -88,7 +88,7 @@ export default function Products({ auth, order }) {
                                             </div>
                                         </marquee>
                                     </div>
-                                    <div className="w-32">
+                                    <div className="w-auto">
                                         <p className="text-gray-500 text-sm">
                                             Total Price
                                         </p>
@@ -151,7 +151,7 @@ export default function Products({ auth, order }) {
                                                     >
                                                         <td className="px-4 py-3">
                                                             <img
-                                                                className="w-20 h-20"
+                                                                className="w-20 h-20 max-w-20 max-h-20"
                                                                 src={
                                                                     orderproduct
                                                                         .product

@@ -58,13 +58,13 @@ const Carousel = () => {
       <Slider {...settings}>
         {CarouselProducts.map((product) => (
           <div key={product.id} className="container w-full mx-auto p-10">
-            <div className="flex justify-evenly items-center flex-col lg:flex-row">
+            <div className="sm:flex justify-evenly items-center lg:flex-row">
               <div className="w-full lg:w-3/5 lg:pl-10">
                 <h1 className="text-2xl font-bold text-red-500 mb-4">{product.name}</h1>
                 <div className="flex items-center mb-4">
                   <span className="text-xl text-gray-800 font-semibold">{product.price} Ks</span>
                 </div>
-                <div className="mt-5 flex justify-start items-center">
+                <div className="my-5 flex justify-start items-center">
                   <span className="text-base text-gray-500">Total Order: {product.order}</span>
                   <span className="ms-10"><Rating rating={product.rate} totalStars={product.totalStar} /></span>
                 </div>

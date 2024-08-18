@@ -135,6 +135,12 @@ export default function Products({ auth, order }) {
                                                     scope="col"
                                                     className="px-4 py-3"
                                                 >
+                                                    city
+                                                </th>
+                                                <th
+                                                    scope="col"
+                                                    className="px-4 py-3"
+                                                >
                                                     Total Price
                                                 </th>
                                             </tr>
@@ -187,6 +193,13 @@ export default function Products({ auth, order }) {
                                                                 orderproduct
                                                                     .product
                                                                     .price
+                                                            }
+                                                        </td>
+                                                        <td className="px-4 py-3">
+                                                            {
+                                                                orderproduct
+                                                                    .product
+                                                                    .city
                                                             }
                                                         </td>
                                                         <td className="px-4 py-3">

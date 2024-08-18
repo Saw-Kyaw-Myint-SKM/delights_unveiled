@@ -36,6 +36,7 @@ export default function EditProduct({ auth, product }) {
         title: product.title,
         description: product.description,
         categories: categoriesList[getCategoryIndex()],
+        city: product.city,
         user_id: auth.user?.id,
         price: product.price,
     });
@@ -211,6 +212,25 @@ export default function EditProduct({ auth, product }) {
                                         </Listbox>
                                     </div>
                                 </div>
+                            </div>
+                            <div>
+                                <InputLabel htmlFor="city" value="City" />
+
+                                <TextInput
+                                    id="city"
+                                    value={data.city}
+                                    onChange={(e) =>
+                                        setData("city", e.target.value)
+                                    }
+                                    type="text"
+                                    className="mt-1 block w-full"
+                                    autoComplete="city"
+                                />
+
+                                <InputError
+                                    message={errors.city}
+                                    className="mt-2"
+                                />
                             </div>
                             <div>
                                 <InputLabel htmlFor="price" value="Price" />

@@ -24,6 +24,7 @@ class UpdateProductRequest extends FormRequest
         return [
             'photo' => ['nullable', 'mimes:jpeg,png,jpg', 'max:2048'],
             'title' => ['required', 'string', 'max:255'],
+            'city' => ['required'],
             'description' => ['required', 'string'],
             'price' => ['required', 'numeric'],
         ];

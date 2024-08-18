@@ -17,6 +17,7 @@ class Product extends Model
         'totalStar',
         'description',
         'categories',
+        'city',
         'total_order',
         'price',
     ];

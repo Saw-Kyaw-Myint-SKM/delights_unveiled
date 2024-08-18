@@ -21,6 +21,7 @@ class ProductFactory extends Factory
             'photo' => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAgS_C07GNqBfFcnJUdyG4fdg4YHgsaLd34w&s",
             'title' => $this->faker->word,
             'description' => $this->faker->paragraph,
+            'city' => "yangon",
             'categories' => $this->faker->randomElement(['food', 'furniture']),
             'total_order' => $this->faker->numberBetween(100, 1000), // Random float with 2 decimal places
             'user_id' => User::factory(),

@@ -49,6 +49,7 @@ class ProductController extends Controller
             'description' => $request->description,
             'user_id' => auth()->user()->id,
             'price' => $request->price,
+            'city' => $request->city,
         ]);
 
         return redirect()->route('products.index')->with('status', 'success');
@@ -59,11 +60,11 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product=Product::with('user')->find($id);
+        $product = Product::with('user')->find($id);
         return Inertia::render('Auth/ShowProduct',
-        [
-            'product' => $product,
-        ]);
+            [
+                'product' => $product,
+            ]);
     }
 
     /**
@@ -98,13 +99,14 @@ class ProductController extends Controller
             $file = $request->file('photo');
             $photo = $file->store('images', 'public');
             $photoPath = Storage::url($photo);
+            $product->photo = $photoPath;
         }
 
         $product->title = $request->title;
         $product->categories = $request->categories['name'];
-        $product->photo = $photoPath;
         $product->description = $request->description;
         $product->price = $request->price;
+        $product->city = $request->city;
         $product->save();
         return redirect()->route('products.index')->with('status', 'success');
     }

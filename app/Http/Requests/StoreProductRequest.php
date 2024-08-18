@@ -25,6 +25,7 @@ class StoreProductRequest extends FormRequest
             'photo' => ['required', 'mimes:jpeg,png,jpg', 'max:2048'],
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
+            'city' => ['required'],
             // 'categories' => ['required', 'string'],
             'user_id' => ['required', 'integer', 'exists:users,id'],
             'price' => ['required', 'numeric'],

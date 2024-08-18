@@ -30,6 +30,7 @@ export default function CreateProduct({ auth }) {
     } = useForm({
         photo: "",
         title: "",
+        city: "",
         description: "",
         categories: categoriesList[0],
         user_id: auth.user?.id,
@@ -202,6 +203,25 @@ export default function CreateProduct({ auth }) {
                                         </Listbox>
                                     </div>
                                 </div>
+                            </div>
+                            <div>
+                                <InputLabel htmlFor="city" value="City" />
+
+                                <TextInput
+                                    id="city"
+                                    value={data.city}
+                                    onChange={(e) =>
+                                        setData("city", e.target.value)
+                                    }
+                                    type="text"
+                                    className="mt-1 block w-full"
+                                    autoComplete="city"
+                                />
+
+                                <InputError
+                                    message={errors.city}
+                                    className="mt-2"
+                                />
                             </div>
                             <div>
                                 <InputLabel htmlFor="price" value="Price" />

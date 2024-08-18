@@ -13,11 +13,14 @@ import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 const roleList = [
     { id: 1, name: "admin", role: 0 },
     { id: 2, name: "producer", role: 1 },
+    { id: 3, name: "customer", role: 2 },
 ];
 
 export default function EditUser({ auth, user }) {
     const getRoleIndex = () => {
-        return roleList.findIndex((r) => r.role === user.role);
+        console.log("user", user.role);
+        console.log(roleList.findIndex((r) => r.role == user.role));
+        return roleList.findIndex((r) => r.role == user.role);
     };
 
     const {

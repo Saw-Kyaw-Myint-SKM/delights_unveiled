@@ -170,6 +170,12 @@ export default function Products({ auth, products, searchValue = "" }) {
                                                     scope="col"
                                                     className="px-4 py-3"
                                                 >
+                                                    city
+                                                </th>
+                                                <th
+                                                    scope="col"
+                                                    className="px-4 py-3"
+                                                >
                                                     <span>Actions</span>
                                                 </th>
                                             </tr>
@@ -204,6 +210,9 @@ export default function Products({ auth, products, searchValue = "" }) {
                                                     </td>
                                                     <td className="px-4 py-3">
                                                         {product.price}
+                                                    </td>
+                                                    <td className="px-4 py-3">
+                                                        {product.city}
                                                     </td>
                                                     <td className="px-4 py-3 w-12 ">
                                                         <div className="flex items-center">

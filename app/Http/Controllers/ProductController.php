@@ -17,8 +17,16 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $searchTerm = $request->input('search');
-        $products = Product::with('user')->where('title', 'like', "%{$searchTerm}%")
-            ->orWhere('description', 'like', "%{$searchTerm}%")->latest('id')->get();
+        $products = Product::with('user')
+            ->where(function ($query) use ($searchTerm) {
+                $query->where('title', 'like', "%{$searchTerm}%")
+                    ->orWhere('description', 'like', "%{$searchTerm}%");
+            })
+            ->when(auth()->user()->role == 1, function ($query) {
+                $query->where('user_id', auth()->id()); // Apply this filter if role is 1
+            })
+            ->latest('id')
+            ->get();
 
         return Inertia::render('Auth/Admin/Product/Products', [
             'products' => $products,

@@ -93,17 +93,18 @@ const ShoppingCart = () => {
     const closeModal = () => {
         setConfirmingPayment(false);
 
-        reset();
+        // reset();
     };
     return (
         <div className="flex flex-col md:flex-row justify-between p-2 w-full">
             <div
                 data-aos="fade-right"
                 data-aos-delay="200"
-                className={`${orderCart.length === 0
-                    ? "w-full flex flex-col items-center"
-                    : "bg-white shadow-md w-full md:w-4/6"
-                    }  rounded-lg mr-0 md:mr-4 py-10`}
+                className={`${
+                    orderCart.length === 0
+                        ? "w-full flex flex-col items-center"
+                        : "bg-white shadow-md w-full md:w-4/6"
+                }  rounded-lg mr-0 md:mr-4 py-10`}
             >
                 {orderCart.length === 0 ? (
                     <p className="mb-10 text-lg font-bold text-gray-700">
@@ -179,8 +180,9 @@ const ShoppingCart = () => {
             <div
                 data-aos="fade-left"
                 data-aos-delay="200"
-                className={`${orderCart.length === 0 ? "hidden" : ""
-                    } w-full md:w-2/6 bg-white shadow-md rounded-lg p-6 mt-4 md:mt-0`}
+                className={`${
+                    orderCart.length === 0 ? "hidden" : ""
+                } w-full md:w-2/6 bg-white shadow-md rounded-lg p-6 mt-4 md:mt-0`}
             >
                 <h3 className="text-base font-bold mb-4 text-gray-600">
                     Order Summary
@@ -240,7 +242,11 @@ const ShoppingCart = () => {
                         <img
                             src="/img/cash.jpg"
                             alt="Cash"
-                            className={`h-8 w-8  rounded ${selectedOption === "cash" ? "opacity-100" : "opacity-80"}`}
+                            className={`h-8 w-8  rounded ${
+                                selectedOption === "cash"
+                                    ? "opacity-100"
+                                    : "opacity-80"
+                            }`}
                         />
                     </label>
                     <label
@@ -257,7 +263,11 @@ const ShoppingCart = () => {
                         <img
                             src="/img/kpay.png"
                             alt="Kpay"
-                            className={`h-8 w-8 rounded ${selectedOption === "kpay" ? "opacity-100" : "opacity-80"}`}
+                            className={`h-8 w-8 rounded ${
+                                selectedOption === "kpay"
+                                    ? "opacity-100"
+                                    : "opacity-80"
+                            }`}
                         />
                     </label>
                 </div>

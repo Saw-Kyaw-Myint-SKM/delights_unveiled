@@ -38,10 +38,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth', 'checkrole:2'])->group(function () {
+Route::middleware(['auth', 'checkrole:1,2'])->group(function () {
     Route::post('/orders', [OrderController::class, 'store'])->name('order.store');
 });
 Route::middleware(['auth', 'checkrole:0,1'])->group(function () {
+
+    // order
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/order/{id}/products', [OrderProductController::class, 'show'])->name('order.products.show');
+    Route::delete('/orders/{id}/delete', [OrderController::class, 'destroy'])->name('order.destroy');
+
     //product
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
     Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
@@ -53,11 +59,6 @@ Route::middleware(['auth', 'checkrole:0,1'])->group(function () {
 
 Route::middleware(['auth', 'checkrole:0'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
-
-    // order
-    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
-    Route::get('/order/{id}/products', [OrderProductController::class, 'show'])->name('order.products.show');
-    Route::delete('/orders/{id}/delete', [OrderController::class, 'destroy'])->name('order.destroy');
 
 // User
     Route::get('/users', [UserController::class, 'index'])->name('users.index');

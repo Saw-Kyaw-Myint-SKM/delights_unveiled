@@ -17,6 +17,11 @@ class OrderController extends Controller
     {
         $searchTerm = $request->input('search');
         $orders = Order::with(['user', 'products'])
+            ->when(auth()->user()->role == 1, function ($query) {
+                $query->whereHas('products', function ($query) {
+                    $query->where('user_id', auth()->id()); // Apply this filter if role is 1
+                });
+            })
             ->whereHas('user', function ($query) use ($searchTerm) {
                 $query->where('name', 'like', "%{$searchTerm}%");
             })

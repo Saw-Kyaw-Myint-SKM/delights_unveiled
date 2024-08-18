@@ -22,7 +22,7 @@ class StoreOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'phone' => "required",
+            'phone' => ['required', 'regex:/^09\d{9}$/'],
             "address" => "required",
         ];
     }

@@ -98,11 +98,12 @@ const ShoppingCart = () => {
     return (
         <div className="flex flex-col md:flex-row justify-between p-2 w-full">
             <div
-                className={`${
-                    orderCart.length === 0
-                        ? "w-full flex flex-col items-center"
-                        : "bg-white shadow-md w-full md:w-4/6"
-                }  rounded-lg mr-0 md:mr-4 py-10`}
+                data-aos="fade-right"
+                data-aos-delay="200"
+                className={`${orderCart.length === 0
+                    ? "w-full flex flex-col items-center"
+                    : "bg-white shadow-md w-full md:w-4/6"
+                    }  rounded-lg mr-0 md:mr-4 py-10`}
             >
                 {orderCart.length === 0 ? (
                     <p className="mb-10 text-lg font-bold text-gray-700">
@@ -176,9 +177,10 @@ const ShoppingCart = () => {
                 </Link>
             </div>
             <div
-                className={`${
-                    orderCart.length === 0 ? "hidden" : ""
-                } w-full md:w-2/6 bg-white shadow-md rounded-lg p-6 mt-4 md:mt-0`}
+                data-aos="fade-left"
+                data-aos-delay="200"
+                className={`${orderCart.length === 0 ? "hidden" : ""
+                    } w-full md:w-2/6 bg-white shadow-md rounded-lg p-6 mt-4 md:mt-0`}
             >
                 <h3 className="text-base font-bold mb-4 text-gray-600">
                     Order Summary
@@ -222,40 +224,43 @@ const ShoppingCart = () => {
 
                     <InputError message={errors.address} className="mt-2" />
                 </div>
-                <div className="mb-10 mt-5 flex items-center space-x-2">
-                    <div>
-                        <label className="text-md mt-1">
-                            <input
-                                type="radio"
-                                value="cash"
-                                checked={selectedOption === "cash"}
-                                onChange={handleOptionChange}
-                            />
-                            <span className="ml-1">Cash</span>
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            <input
-                                type="radio"
-                                value="kpay"
-                                checked={selectedOption === "kpay"}
-                                onChange={handleOptionChange}
-                            />
-                            <span className="ml-1">Kpay</span>
-                        </label>
-                    </div>
-                </div>
-                {/* <div className="mb-10">
-                    <label className="block mb-2 font-semibold text-sm text-gray-500">
-                        Promo Code
+
+                <div className=" w-2/5 md:w-1/2 mb-10 mt-5 flex items-center justify-evenly space-x-2">
+                    <label
+                        className={`p-1 rounded cursor-pointer flex items-center justify-center
+            ${selectedOption === "cash" ? "bg-blue-500" : "bg-gray-200"}`}
+                    >
+                        <input
+                            type="radio"
+                            value="cash"
+                            checked={selectedOption === "cash"}
+                            onChange={handleOptionChange}
+                            className="hidden"
+                        />
+                        <img
+                            src="/img/cash.jpg"
+                            alt="Cash"
+                            className={`h-8 w-8  rounded ${selectedOption === "cash" ? "opacity-100" : "opacity-80"}`}
+                        />
                     </label>
-                    <input
-                        type="text"
-                        className="w-full border px-4 py-2 font-semibold text-sm text-gray-500"
-                        placeholder="Enter your code"
-                    />
-                </div> */}
+                    <label
+                        className={`p-1 rounded cursor-pointer flex items-center justify-center
+            ${selectedOption === "kpay" ? "bg-blue-500" : "bg-gray-200"}`}
+                    >
+                        <input
+                            type="radio"
+                            value="kpay"
+                            checked={selectedOption === "kpay"}
+                            onChange={handleOptionChange}
+                            className="hidden"
+                        />
+                        <img
+                            src="/img/kpay.png"
+                            alt="Kpay"
+                            className={`h-8 w-8 rounded ${selectedOption === "kpay" ? "opacity-100" : "opacity-80"}`}
+                        />
+                    </label>
+                </div>
                 <div className="mb-4">
                     <span className="font-semibold text-sm text-gray-500">
                         Total Cost:

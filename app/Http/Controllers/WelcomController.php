@@ -25,6 +25,7 @@ class WelcomController extends Controller
             })
             ->latest('id')
             ->get();
+        $latestProduct = Product::latest()->take(5)->get();
         return Inertia::render('Welcome', [
             'user' => auth()->user(),
             'isAuthenticated' => auth()->check(),
@@ -35,6 +36,7 @@ class WelcomController extends Controller
             'products' => $products,
             'searchValue' => $searchTerm,
             'categoryValue' => $category,
+            'latestProduct' => $latestProduct,
         ]);
     }
 }

@@ -15,6 +15,7 @@ export default function Welcome({
     isAuthenticated,
     laravelVersion,
     phpVersion,
+    latestProduct,
     products,
     searchValue,
     categoryValue,
@@ -78,7 +79,8 @@ export default function Welcome({
                                 Best Collection For Home Decoration
                             </h1>
                             <p className="text-gray-300 text-sm md:text-lg">
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit...
+                                Lorem, ipsum dolor sit amet consectetur
+                                adipisicing elit...
                             </p>
                             <button
                                 className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4"
@@ -117,10 +119,11 @@ export default function Welcome({
                             data-aos="fade-right"
                             data-aos-delay="500"
                             onClick={() => handleCategoryChange("all")}
-                            className={`border-2 px-4 py-2 rounded font-bold ${category === "all" || category == ""
-                                ? "bg-red-400 text-white border-green-500"
-                                : "border-red-500 text-red-500"
-                                }`}
+                            className={`border-2 px-4 py-2 rounded font-bold ${
+                                category === "all" || category == ""
+                                    ? "bg-red-400 text-white border-green-500"
+                                    : "border-red-500 text-red-500"
+                            }`}
                         >
                             All
                         </button>
@@ -128,10 +131,11 @@ export default function Welcome({
                             data-aos="fade-right"
                             data-aos-delay="400"
                             onClick={() => handleCategoryChange("food")}
-                            className={`border-2 px-4 py-2 rounded font-bold ${category === "food"
-                                ? "bg-red-400 text-white border-green-500"
-                                : "border-red-500  text-red-500"
-                                }`}
+                            className={`border-2 px-4 py-2 rounded font-bold ${
+                                category === "food"
+                                    ? "bg-red-400 text-white border-green-500"
+                                    : "border-red-500  text-red-500"
+                            }`}
                         >
                             Food
                         </button>
@@ -139,10 +143,11 @@ export default function Welcome({
                             data-aos="fade-right"
                             data-aos-delay="200"
                             onClick={() => handleCategoryChange("furniture")}
-                            className={`border-2 px-4 py-2 rounded font-bold ${category === "furniture"
-                                ? "bg-red-400 text-white border-green-500"
-                                : "border-red-500  text-red-500"
-                                }`}
+                            className={`border-2 px-4 py-2 rounded font-bold ${
+                                category === "furniture"
+                                    ? "bg-red-400 text-white border-green-500"
+                                    : "border-red-500  text-red-500"
+                            }`}
                         >
                             Furniture
                         </button>
@@ -161,7 +166,7 @@ export default function Welcome({
                     </div>
                 </div>
                 <section className="relative sm:flex sm:justify-center sm:items-start bg-dots-darker bg-center bg-gray-200 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white py-10">
-                    <Carousel />
+                    <Carousel latestProduct={latestProduct} />
                 </section>
                 <Footer />
             </WelcomLayout>

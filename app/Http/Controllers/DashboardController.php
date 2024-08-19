@@ -41,9 +41,7 @@ class DashboardController extends Controller
                 ->count('cart_number');
 
             // Get count of unique users (based on orders)
-            $userCount = Order::whereBetween('created_at', [$monthStart, $monthEnd])
-                ->distinct('user_id')
-                ->count('user_id');
+            $userCount = User::whereBetween('created_at', [$monthStart, $monthEnd])->count();
 
             // Format the month for display (e.g., "June 2024")
             $months[] = $monthStart->format('F Y');

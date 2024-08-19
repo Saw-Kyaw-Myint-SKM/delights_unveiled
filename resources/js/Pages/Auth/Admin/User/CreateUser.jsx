@@ -9,10 +9,12 @@ import { useForm } from "@inertiajs/react";
 import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
+import Swal from "sweetalert2";
 
 const roleList = [
     { id: 1, name: "admin", role: 0 },
     { id: 2, name: "producer", role: 1 },
+    { id: 3, name: "customer", role: 2 },
 ];
 
 export default function CreateProduct({ auth }) {
@@ -37,7 +39,24 @@ export default function CreateProduct({ auth }) {
         e.preventDefault();
         post(route("user.store"), {
             preserveScroll: true,
-            onSuccess: () => reset(),
+            onSuccess: () => {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    },
+                });
+                Toast.fire({
+                    icon: "success",
+                    title: "User is Created successfull",
+                });
+                reset();
+            },
             onError: (errors) => {
                 console.log("errors", errors);
             },

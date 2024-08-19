@@ -2,6 +2,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import BarChart from "@/Components/BarChart";
 import LineChart from "@/Components/LineChart";
+import { Link } from "@inertiajs/react";
 
 export default function Dashboard({
     auth,
@@ -29,7 +30,10 @@ export default function Dashboard({
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4">
-                                <div className="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
+                                <Link
+                                    href={route("users.index")}
+                                    className="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group"
+                                >
                                     <div className="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
                                         <svg
                                             width="30"
@@ -51,8 +55,11 @@ export default function Dashboard({
                                         <p className="text-2xl">{totalUser}</p>
                                         <p>Total User</p>
                                     </div>
-                                </div>
-                                <div className="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
+                                </Link>
+                                <Link
+                                    href={route("products.index")}
+                                    className="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group"
+                                >
                                     <div className="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
                                         <svg
                                             width="30"
@@ -76,8 +83,11 @@ export default function Dashboard({
                                         </p>
                                         <p>Total Product</p>
                                     </div>
-                                </div>
-                                <div className="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
+                                </Link>
+                                <Link
+                                    href={route("orders.index")}
+                                    className="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group"
+                                >
                                     <div className="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
                                         <svg
                                             width="30"
@@ -101,7 +111,7 @@ export default function Dashboard({
                                         </p>
                                         <p>Total Order</p>
                                     </div>
-                                </div>
+                                </Link>
                                 <div className="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
                                     <div className="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
                                         <svg

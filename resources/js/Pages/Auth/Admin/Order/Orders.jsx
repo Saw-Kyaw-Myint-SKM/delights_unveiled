@@ -2,6 +2,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
 import { useForm } from "@inertiajs/react";
 import { useEffect } from "react";
+import Swal from "sweetalert2";
 
 export default function Orders({ auth, orders, searchValue = "" }) {
     const {
@@ -29,7 +30,24 @@ export default function Orders({ auth, orders, searchValue = "" }) {
         );
         if (confirmed) {
             destroy(route("order.destroy", id), {
-                onSuccess: () => console.log("Order deleted successfully"),
+                onSuccess: () => {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                        },
+                    });
+                    Toast.fire({
+                        icon: "success",
+                        title: "Order is deleted successfull",
+                    });
+                    console.log("Order deleted successfully");
+                },
                 onError: (error) =>
                     console.error("Error deleting order:", error),
             });

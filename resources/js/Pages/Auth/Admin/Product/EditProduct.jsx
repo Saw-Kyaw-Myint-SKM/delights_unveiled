@@ -10,6 +10,7 @@ import TextArea from "@/Components/TextArea";
 import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
+import Swal from "sweetalert2";
 
 export default function EditProduct({ auth, product }) {
     const textareaInput = useRef();
@@ -46,7 +47,24 @@ export default function EditProduct({ auth, product }) {
         console.log("data", data);
         post(route("product.update", product.id), {
             preserveScroll: true,
-            onSuccess: () => reset(),
+            onSuccess: () => {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    },
+                });
+                Toast.fire({
+                    icon: "success",
+                    title: "Product is edited successfull",
+                });
+                reset();
+            },
             onError: (errors) => {
                 console.log("errors", errors);
                 // if (errors.password) {

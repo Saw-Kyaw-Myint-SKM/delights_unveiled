@@ -17,7 +17,8 @@ class WelcomController extends Controller
         $products = Product::with('user')
             ->where(function ($query) use ($searchTerm) {
                 $query->where('title', 'like', "%{$searchTerm}%")
-                    ->orWhere('description', 'like', "%{$searchTerm}%");
+                    ->orWhere('description', 'like', "%{$searchTerm}%")
+                    ->orWhere('city', 'like', "%{$searchTerm}%");;
             })
             ->when($category && $category !== 'all', function ($query) use ($category) {
                 $query->where('categories', 'like', "%{$category}%");

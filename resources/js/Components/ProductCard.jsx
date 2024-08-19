@@ -14,10 +14,13 @@ const ProductCard = ({ products, onAddToCart }) => {
                     data-aos-anchor-placement="top-bottom"
                     data-aos-delay="200"
                     key={product.id}
-                    className="max-w-sm rounded overflow-hidden shadow-lg"
+                    className="max-w-sm rounded  md:w-64 overflow-hidden shadow-lg"
                 >
                     <Link href={route("product.show", product.id)}>
-                        <img className="w-full" src={product.photo} />
+                        <img
+                            className="w-full md:h-[30vh]"
+                            src={product.photo}
+                        />
                         <div className="p-4">
                             <div className="text-black dark:text-gray-100 font-bold text-xl mb-1">
                                 {product.title}

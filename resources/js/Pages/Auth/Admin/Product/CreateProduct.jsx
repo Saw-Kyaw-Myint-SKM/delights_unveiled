@@ -10,6 +10,7 @@ import TextArea from "@/Components/TextArea";
 import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
+import Swal from "sweetalert2";
 
 const categoriesList = [
     { id: 1, name: "furniture" },
@@ -42,7 +43,24 @@ export default function CreateProduct({ auth }) {
         console.log("data", data);
         post(route("product.store"), {
             preserveScroll: true,
-            onSuccess: () => reset(),
+            onSuccess: () => {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    },
+                });
+                Toast.fire({
+                    icon: "success",
+                    title: "Product is created successfull",
+                });
+                reset();
+            },
             onError: (errors) => {
                 console.log("errors", errors);
                 // if (errors.password) {

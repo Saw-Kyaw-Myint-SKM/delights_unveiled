@@ -8,6 +8,7 @@ import TextInput from "@/Components/TextInput";
 import { useForm } from "@inertiajs/react";
 import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
+import Swal from "sweetalert2";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
 const roleList = [
@@ -43,7 +44,24 @@ export default function EditUser({ auth, user }) {
         e.preventDefault();
         post(route("user.update", user.id), {
             preserveScroll: true,
-            onSuccess: () => reset(),
+            onSuccess: () => {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    },
+                });
+                Toast.fire({
+                    icon: "success",
+                    title: "User is edited successfull",
+                });
+                reset();
+            },
             onError: (errors) => {
                 console.log("errors", errors);
             },

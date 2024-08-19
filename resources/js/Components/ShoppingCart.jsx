@@ -8,6 +8,7 @@ import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import SecondaryButton from "./SecondaryButton";
 import DangerButton from "./DangerButton";
+import Swal from "sweetalert2";
 import PrimaryButton from "./PrimaryButton";
 
 const ShoppingCart = () => {
@@ -83,7 +84,27 @@ const ShoppingCart = () => {
         data.total_price = calculateTotal();
         post(route("order.store"), {
             preserveScroll: true,
-            onSuccess: () => setOrderCart([]),
+            onSuccess: (e) => {
+                if (e.component == "Welcome") {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                        },
+                    });
+                    Toast.fire({
+                        icon: "success",
+                        title: "Order is successfull",
+                    });
+                }
+
+                setOrderCart([]);
+            },
             onError: (errors) => {
                 closeModal();
             },

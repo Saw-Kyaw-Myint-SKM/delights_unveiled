@@ -28,9 +28,13 @@ const Blog = ({ auth, laravelVersion, phpVersion }) => {
                                     offer. Join us on a journey to explore the
                                     wonders of the natural world.
                                 </p>
-                                <button className="bg-red-500 text-white py-2 px-4 rounded-md">
+                                <a
+                                    href="https://en.wikipedia.org/wiki/Bago,_Myanmar"
+                                    target="__blank"
+                                    className="bg-red-500 text-white py-2 px-4 rounded-md"
+                                >
                                     Eplore...
-                                </button>
+                                </a>
                             </div>
                             <div
                                 data-aos="fade-left"
@@ -160,14 +164,15 @@ const Blog = ({ auth, laravelVersion, phpVersion }) => {
                                     A Journey Through the Forest
                                 </h2>
                                 <p className="text-base sm:text-lg mb-6">
-                                    Forests are teeming with life and mystery. Watch this video to experience the lush greenery and the sounds of the forest.
+                                    Forests are teeming with life and mystery.
+                                    Watch this video to experience the lush
+                                    greenery and the sounds of the forest.
                                 </p>
                             </div>
                             <div
                                 data-aos="fade-up"
                                 data-aos-duration="700"
                                 className="lg:absolute lg:z-0 lg:transform lg:-translate-x-1/2  lg:left-36 lg:top-44 lg:w-1/2 mt-8 mb-5 md:mt-0 md:pl-8"
-
                             >
                                 <div className="aspect-video">
                                     <iframe

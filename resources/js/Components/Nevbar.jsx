@@ -13,7 +13,7 @@ const Navbar = () => {
             <div className="flex items-center">
                 <div className="flex space-x-4 max-w-7xl ">
                     <NavLink
-                        href="blog"
+                        href={route("blog")}
                         className="text-white hover:text-red-400"
                         active={route().current("blog")}
                     >
@@ -22,7 +22,7 @@ const Navbar = () => {
                     </NavLink>
                     {/* <NavLink href='about'className="text-white hover:text-gray-200"> About Us</NavLink> */}
                     <NavLink
-                        href="contact"
+                        href={route("contact")}
                         className="text-white hover:text-red-500"
                         active={route().current("contact")}
                     >

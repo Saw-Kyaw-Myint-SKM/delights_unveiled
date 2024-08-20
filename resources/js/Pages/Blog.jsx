@@ -9,7 +9,7 @@ const Blog = ({ auth, laravelVersion, phpVersion }) => {
     return (
         <>
             <Head title="Delights Unveiled" />
-            <WelcomLayout>
+            <WelcomLayout user={auth.user}>
                 <div className="w-full">
                     <Navbar />
                     <section className="mb-12 mx-auto px-16 py-8">

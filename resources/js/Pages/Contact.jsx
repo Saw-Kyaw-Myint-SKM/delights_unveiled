@@ -41,7 +41,7 @@ export default function Contact({ auth, laravelVersion, phpVersion }) {
     return (
         <>
             <Head title="Delights Unveiled" />
-            <WelcomLayout>
+            <WelcomLayout user={auth.user}>
                 <section>
                     <Navbar />
                 </section>

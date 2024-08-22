@@ -17,7 +17,8 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $searchTerm = $request->input('search');
-        $products = Product::with('user')
+        $products = Product::with(['orderProducts', 'user'])
+            ->withSum('orderProducts as total_order_quantity', 'quantity')
             ->where(function ($query) use ($searchTerm) {
                 $query->where('title', 'like', "%{$searchTerm}%")
                     ->orWhere('description', 'like', "%{$searchTerm}%");
@@ -27,7 +28,7 @@ class ProductController extends Controller
             })
             ->latest('id')
             ->get();
-
+        // dd($products->toArray());
         return Inertia::render('Auth/Admin/Product/Products', [
             'products' => $products,
             'searchValue' => $searchTerm,

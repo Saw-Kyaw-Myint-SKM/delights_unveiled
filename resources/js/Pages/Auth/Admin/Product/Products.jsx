@@ -221,7 +221,10 @@ export default function Products({ auth, products, searchValue = "" }) {
                                                         {product.categories}
                                                     </td>
                                                     <td className="px-4 py-3">
-                                                        {product.total_order}
+                                                        {parseInt(
+                                                            product.total_order_quantity ??
+                                                                0
+                                                        )}
                                                     </td>
                                                     <td className="px-4 py-3">
                                                         {product.user.name}

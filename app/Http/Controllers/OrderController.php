@@ -6,6 +6,7 @@ use App\Http\Requests\StoreOrderRequest;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class OrderController extends Controller
@@ -47,15 +48,24 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
+        // dd($request->toArray());
         $userId = auth()->id();
         $firstLetter = substr(auth()->user()->name, 0, 1);
         $randomNumber = mt_rand(1000, 9999);
         $cart_number = $userId . $firstLetter . $randomNumber;
+
+        $photoPath = '';
+        if ($request->hasFile('evidence')) {
+            $file = $request->file('evidence');
+            $photo = $file->store('images', 'public');
+            $photoPath = Storage::url($photo);
+        }
         $order = Order::create(['user_id' => auth()->user()->id,
             'phone' => $request->phone,
             'address' => $request->address,
             'payment' => $request->payment,
             'total_price' => $request->total_price,
+            'evidence' => $photoPath,
             'cart_number' => $cart_number,
         ]);
         foreach ($request->orders as $key => $product) {

@@ -24,6 +24,7 @@ class StoreOrderRequest extends FormRequest
         return [
             'phone' => ['required', 'regex:/^09\d{9}$/'],
             "address" => "required",
+            "evidence" => 'required_if:payment,kpay',
         ];
     }
 }

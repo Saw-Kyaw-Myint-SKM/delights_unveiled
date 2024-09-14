@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('evidence')->nullable();
             $table->decimal('total_price')->default(0);
             $table->string('cart_number');
+            $table->enum('status', ['cash', 'kpay']);
             $table->timestamps();
         });
     }

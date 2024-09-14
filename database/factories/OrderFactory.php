@@ -24,6 +24,7 @@ class OrderFactory extends Factory
             'phone' => "09" . $this->faker->numberBetween(100000000, 999999999),
             'payment' => 'cash',
             'address' => 'ddd',
+            'address' => 1,
             'total_price' => $this->faker->randomFloat(2, 1, 100),
             'cart_number' => "$cartNumber",
         ];

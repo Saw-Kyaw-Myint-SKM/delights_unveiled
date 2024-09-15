@@ -100,7 +100,7 @@ export default function Authenticated({
                             </form>
                         </div>
                         <div className="flex sm:items-center sm:ms-6">
-                            {(!user?.email || user?.role == 3) && (
+                            {(!user?.email || user?.role == 2) && (
                                 <div className="flex items-center space-x-4">
                                     <Link
                                         href={route("add-to-card")}

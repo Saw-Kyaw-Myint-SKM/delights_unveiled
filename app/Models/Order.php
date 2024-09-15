@@ -17,6 +17,7 @@ class Order extends Model
         "payment",
         'total_price',
         "evidence",
+        "status",
         'cart_number',
     ];
 

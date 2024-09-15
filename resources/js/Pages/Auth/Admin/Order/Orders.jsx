@@ -203,12 +203,22 @@ export default function Orders({ auth, orders, searchValue = "" }) {
                                                 >
                                                     Total Price
                                                 </th>
-                                                <th
-                                                    scope="col"
-                                                    className="px-4 py-3"
-                                                >
-                                                    <span>Actions</span>
-                                                </th>
+                                                {auth.user.role == 0 && (
+                                                    <>
+                                                        <th
+                                                            scope="col"
+                                                            className="px-4 py-3"
+                                                        >
+                                                            <span>Status</span>
+                                                        </th>
+                                                        <th
+                                                            scope="col"
+                                                            className="px-4 py-3"
+                                                        >
+                                                            <span>Actions</span>
+                                                        </th>
+                                                    </>
+                                                )}
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -271,7 +281,7 @@ export default function Orders({ auth, orders, searchValue = "" }) {
                                                                         "new"
                                                                             ? "bg-pink-300"
                                                                             : "bg-green-300"
-                                                                    } "text-gray-500 font-serif bg-opacity-50 px-4 border shadow py-1 rounded rounded-full"`}
+                                                                    } "text-gray-500 font-serif hover:bg-opacity-35 bg-opacity-50 px-4 border shadow py-1 rounded rounded-full"`}
                                                                     type="button"
                                                                     data-ripple-light="true"
                                                                 >
@@ -280,7 +290,11 @@ export default function Orders({ auth, orders, searchValue = "" }) {
                                                                     }
                                                                 </button>
                                                             )}
-                                                            {auth.user.role !==
+                                                        </div>
+                                                    </td>
+                                                    <td className="px-4 py-3 w-12 ">
+                                                        <div className="flex items-center">
+                                                            {auth.user.role ==
                                                                 0 && (
                                                                 <button
                                                                     onClick={(

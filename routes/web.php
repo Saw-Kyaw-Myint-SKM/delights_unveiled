@@ -38,7 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth', 'checkrole:1,2'])->group(function () {
+Route::middleware(['auth', 'checkrole:2'])->group(function () {
     Route::post('/orders', [OrderController::class, 'store'])->name('order.store');
 });
 Route::middleware(['auth', 'checkrole:0,1,2'])->group(function () {

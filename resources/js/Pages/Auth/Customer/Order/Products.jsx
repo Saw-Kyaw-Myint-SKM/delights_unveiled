@@ -1,4 +1,4 @@
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import WelcomLayout from "@/Layouts/WelcomeLayout";
 import { Head, Link } from "@inertiajs/react";
 import { useForm } from "@inertiajs/react";
 import Modal from "@/Components/Modal";
@@ -72,14 +72,7 @@ export default function Products({ auth, order }) {
         });
     };
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-            header={
-                <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Products / List
-                </h2>
-            }
-        >
+        <WelcomLayout user={auth.user}>
             <Head title="Order Detail" />
 
             <div className="py-12">
@@ -298,6 +291,6 @@ export default function Products({ auth, order }) {
                     </section>
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </WelcomLayout>
     );
 }

@@ -17,14 +17,29 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $searchTerm = $request->input('search');
+        if (auth()->user()->role == 2) {
+            $orders = Order::with(['user', 'products'])
+                ->where('user_id', auth()->user()->id)
+                ->whereHas('user', function ($query) use ($searchTerm) {
+                    $query->where('name', 'like', "%{$searchTerm}%");
+                })
+                ->latest('id')
+                ->get();
+
+            return Inertia::render('Auth/Customer/Order/Orders', [
+                'orders' => $orders,
+                'searchValue' => $searchTerm,
+            ]);
+        }
+
         $orders = Order::with(['user', 'products'])
             ->when(auth()->user()->role == 1, function ($query) {
                 $query->whereHas('products', function ($query) {
                     $query->where('user_id', auth()->id()); // Apply this filter if role is 1
                 });
             })
-            ->whereHas('user', function ($query) use ($searchTerm) {
-                $query->where('name', 'like', "%{$searchTerm}%");
+            ->whereHas('products', function ($query) use ($searchTerm) {
+                $query->where('title', 'like', "%{$searchTerm}%");
             })
             ->latest('id')
             ->get();
@@ -36,7 +51,8 @@ class OrderController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     *
+     * the form for creating a new resource.
      */
     public function create()
     {

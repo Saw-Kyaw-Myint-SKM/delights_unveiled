@@ -190,6 +190,11 @@ export default function Authenticated({
                                                         </>
                                                     )}
                                                 <Dropdown.Link
+                                                    href={route("orders.index")}
+                                                >
+                                                    Order
+                                                </Dropdown.Link>
+                                                <Dropdown.Link
                                                     href={route(
                                                         "user.profile.edit"
                                                     )}
@@ -289,6 +294,9 @@ export default function Authenticated({
                                 href={route("user.profile.edit")}
                             >
                                 Profile
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink href={route("orders.index")}>
+                                Order
                             </ResponsiveNavLink>
                             <ResponsiveNavLink
                                 method="post"

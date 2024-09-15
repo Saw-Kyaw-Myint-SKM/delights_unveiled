@@ -1,4 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import WelcomLayout from "@/Layouts/WelcomeLayout";
 import { Head, Link } from "@inertiajs/react";
 import { useForm } from "@inertiajs/react";
 import { useEffect } from "react";
@@ -96,14 +97,7 @@ export default function Orders({ auth, orders, searchValue = "" }) {
     }, []);
 
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-            header={
-                <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Orders / List
-                </h2>
-            }
-        >
+        <WelcomLayout user={auth.user}>
             <Head title="Orders" />
 
             <div className="py-12">
@@ -112,7 +106,7 @@ export default function Orders({ auth, orders, searchValue = "" }) {
                         <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
                             <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
                                 <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
-                                    <div className="w-full md:w-1/2">
+                                    {/* <div className="w-full md:w-1/2">
                                         <form
                                             className="flex items-center"
                                             onSubmit={onSubmitSearch}
@@ -155,6 +149,11 @@ export default function Orders({ auth, orders, searchValue = "" }) {
                                                 />
                                             </div>
                                         </form>
+                                    </div> */}
+                                    <div>
+                                        <h2 className=" font-semibold text-xl">
+                                            Your Orders
+                                        </h2>
                                     </div>
                                 </div>
                                 <div className="overflow-x-auto">
@@ -207,7 +206,7 @@ export default function Orders({ auth, orders, searchValue = "" }) {
                                                     scope="col"
                                                     className="px-4 py-3"
                                                 >
-                                                    <span>Actions</span>
+                                                    Status
                                                 </th>
                                             </tr>
                                         </thead>
@@ -255,63 +254,21 @@ export default function Orders({ auth, orders, searchValue = "" }) {
                                                     </td>
                                                     <td className="px-4 py-3 w-12 ">
                                                         <div className="flex items-center">
-                                                            {auth.user.role ==
-                                                                0 && (
-                                                                <button
-                                                                    onClick={(
-                                                                        e
-                                                                    ) => {
-                                                                        updateStatus(
-                                                                            order.status,
-                                                                            order.id
-                                                                        );
-                                                                    }}
-                                                                    className={`${
-                                                                        order.status ==
-                                                                        "new"
-                                                                            ? "bg-pink-300"
-                                                                            : "bg-green-300"
-                                                                    } "text-gray-500 font-serif bg-opacity-50 px-4 border shadow py-1 rounded rounded-full"`}
-                                                                    type="button"
-                                                                    data-ripple-light="true"
-                                                                >
-                                                                    {
-                                                                        order.status
-                                                                    }
-                                                                </button>
-                                                            )}
-                                                            {auth.user.role !==
-                                                                0 && (
-                                                                <button
-                                                                    onClick={(
-                                                                        e
-                                                                    ) => {
-                                                                        deleteProduct(
-                                                                            order.id
-                                                                        );
-                                                                    }}
-                                                                    id="apple-imac-27-dropdown-button"
-                                                                    className="inline-flex items-center p-0.5 text-sm font-medium text-center ml-2 text-red-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
-                                                                    type="button"
-                                                                >
-                                                                    <svg
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                        fill="none"
-                                                                        viewBox="0 0 24 24"
-                                                                        strokeWidth={
-                                                                            1.5
-                                                                        }
-                                                                        stroke="currentColor"
-                                                                        className="size-6"
-                                                                    >
-                                                                        <path
-                                                                            strokeLinecap="round"
-                                                                            strokeLinejoin="round"
-                                                                            d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
-                                                                        />
-                                                                    </svg>
-                                                                </button>
-                                                            )}
+                                                            <p
+                                                                className={`${
+                                                                    order.status ==
+                                                                    "new"
+                                                                        ? "bg-pink-300"
+                                                                        : "bg-green-300"
+                                                                } "text-gray-500 font-serif bg-opacity-50 px-4 border shadow py-1 rounded rounded-full"`}
+                                                                type="button"
+                                                                data-ripple-light="true"
+                                                            >
+                                                                {order.status ==
+                                                                "complete"
+                                                                    ? order.status
+                                                                    : "InProgress..."}
+                                                            </p>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -324,6 +281,6 @@ export default function Orders({ auth, orders, searchValue = "" }) {
                     </section>
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </WelcomLayout>
     );
 }

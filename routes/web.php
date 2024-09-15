@@ -41,7 +41,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'checkrole:1,2'])->group(function () {
     Route::post('/orders', [OrderController::class, 'store'])->name('order.store');
 });
-Route::middleware(['auth', 'checkrole:0,1'])->group(function () {
+Route::middleware(['auth', 'checkrole:0,1,2'])->group(function () {
 
     // order
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');

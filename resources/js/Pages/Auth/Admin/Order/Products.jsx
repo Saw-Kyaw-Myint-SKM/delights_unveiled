@@ -135,14 +135,16 @@ export default function Products({ auth, order }) {
                                                     />
                                                 </div>
                                             )}
-                                            <div>
-                                                <p className="text-gray-500 text-sm">
-                                                    Total Price
-                                                </p>
-                                                <p className="font-bold font-mono text-xl text-blue-600">
-                                                    {order.total_price}
-                                                </p>
-                                            </div>
+                                            {auth.user.role !== 1 && (
+                                                <div>
+                                                    <p className="text-gray-500 text-sm">
+                                                        Total Price
+                                                    </p>
+                                                    <p className="font-bold font-mono text-xl text-blue-600">
+                                                        {order.total_price}
+                                                    </p>
+                                                   </div>
+                                            )}
                                         </div>
                                     </div>
                                 </div>

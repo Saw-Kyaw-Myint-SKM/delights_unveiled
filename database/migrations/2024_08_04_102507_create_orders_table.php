@@ -18,7 +18,7 @@ return new class extends Migration
             $table->enum('payment', ['cash', 'kpay']);
             $table->string('address')->nullable();
             $table->string('evidence')->nullable();
-            $table->decimal('total_price')->default(0);
+            $table->bigInteger('total_price')->default(0);
             $table->string('cart_number');
             $table->enum('status', ['new', 'complete']);
             $table->timestamps();

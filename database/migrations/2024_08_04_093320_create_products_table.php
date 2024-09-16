@@ -20,9 +20,9 @@ return new class extends Migration
             $table->integer('rating')->default(3);
             $table->integer('totalStars')->default(5);
             $table->enum('categories', ['food', 'furniture']);
-            $table->integer('total_order')->default(0);
+            $table->bigInteger('total_order')->default(0);
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->integer('price');
+            $table->bigInteger('price');
             $table->timestamps();
         });
     }

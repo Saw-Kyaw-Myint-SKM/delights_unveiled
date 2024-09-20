@@ -100,7 +100,7 @@ export default function Products({ auth, order }) {
                                         <marquee behavior="" direction="right">
                                             <div className="flex items-center">
                                                 <img
-                                                    className="w-12 h-12 mr-7"
+                                                    className="w-12 h-12 mr-7 jnjn"
                                                     src="https://cdn-icons-png.flaticon.com/512/3481/3481069.png"
                                                     alt="order"
                                                 />

@@ -129,7 +129,7 @@ const ShoppingCart = () => {
                     orderCart.length === 0
                         ? "w-full flex flex-col items-center"
                         : "bg-white shadow-md w-full md:w-4/6"
-                }  rounded-lg mr-0 md:mr-4 py-10`}
+                }  rounded-lg mr-0 md:mr-4 py-8`}
             >
                 {orderCart.length === 0 ? (
                     <p className="mb-10 text-lg font-bold text-gray-700">
@@ -198,28 +198,70 @@ const ShoppingCart = () => {
                         ))}
                     </div>
                 )}
-                <Link href="/" className="ps-4 text-blue-500 hover:underline">
-                    Continue Shopping
-                </Link>
+                <div className="flex items-center justify-between mr-5">
+                    <Link
+                        href="/"
+                        className="ps-4 animate-bounce flex items-center text-blue-500 hover:underline"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="size-8 mr-1 font-semibold"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18"
+                            />
+                        </svg>
+                        Continue Shopping
+                    </Link>
+                    <div className="flex items-center mb-4">
+                        <div className="flex items-center font-semibold text-sm text-gray-500">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                className="size-6 mr-2 text-red-400"
+                            >
+                                <path d="M2.25 2.25a.75.75 0 0 0 0 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 0 0-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 0 0 0-1.5H5.378A2.25 2.25 0 0 1 7.5 15h11.218a.75.75 0 0 0 .674-.421 60.358 60.358 0 0 0 2.96-7.228.75.75 0 0 0-.525-.965A60.864 60.864 0 0 0 5.68 4.509l-.232-.867A1.875 1.875 0 0 0 3.636 2.25H2.25ZM3.75 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0ZM16.5 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" />
+                            </svg>
+                            Items: {orderCart.length} ,
+                        </div>
+                        <div className="ml-4 font-semibold flex items-center text-base text-gray-500">
+                            Total Amounts :
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth={1.5}
+                                stroke="currentColor"
+                                className="size-6 ml-2 text-green-500 mr-2"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z"
+                                />
+                            </svg>
+                            {calculateTotal()} Ks
+                        </div>
+                    </div>
+                </div>
             </div>
             <div
                 data-aos="fade-left"
                 data-aos-delay="200"
                 className={`${
                     orderCart.length === 0 ? "hidden" : ""
-                } w-full md:w-2/6 bg-white shadow-md rounded-lg p-6 mt-4 md:mt-0`}
+                } w-full md:w-2/6 bg-white shadow-md rounded-lg p-4 mt-4 md:mt-0`}
             >
                 <h3 className="text-base font-bold mb-4 text-gray-600">
                     Order Summary
                 </h3>
-                <div className="mb-4">
-                    <span className="font-semibold text-sm text-gray-500">
-                        Items: {orderCart.length}
-                    </span>
-                    <span className="ml-4 font-semibold text-base text-gray-500">
-                        {calculateTotal()} Ks
-                    </span>
-                </div>
                 <div>
                     <InputLabel htmlFor="phone" value="Phone" />
 
